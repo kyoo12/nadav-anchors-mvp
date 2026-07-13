@@ -1,0 +1,10 @@
+node_modules/
+*.3dm
+*.3dmbak
+*.rhl
+*.obj
+*.mtl
+*.dxf
+*.rcp
+*.png
+.env
