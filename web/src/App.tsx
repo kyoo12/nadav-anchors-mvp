@@ -117,7 +117,7 @@ function App() {
             onChange={(e) => setSearchQuery(e.target.value)}
             style={{ 
               flex: 1, padding: '8px 12px', borderRadius: '4px', 
-              border: '1px solid rgba(255,255,255,0.2)', background: 'rgba(0,0,0,0.2)', color: 'white' 
+              border: '1px solid var(--border-glass)', background: '#f8fafc', color: 'var(--text-main)' 
             }} 
           />
           <button type="submit" style={{ padding: '8px 16px', borderRadius: '4px', background: 'var(--accent-blue)', color: 'white', border: 'none', cursor: 'pointer' }}>
@@ -165,7 +165,7 @@ function App() {
       />
 
       <Canvas camera={{ position: [0, 40, 60], fov: 45 }}>
-        <color attach="background" args={['#0f1115']} />
+        <color attach="background" args={['#f1f5f9']} />
         
         <ambientLight intensity={0.5} />
         <directionalLight position={[10, 20, 10]} intensity={1} />
@@ -177,10 +177,10 @@ function App() {
           args={[200, 200]} 
           cellSize={1} 
           cellThickness={1} 
-          cellColor="#1f2937" 
+          cellColor="#cbd5e1" 
           sectionSize={10} 
           sectionThickness={1.5} 
-          sectionColor="#374151" 
+          sectionColor="#94a3b8" 
           fadeDistance={100} 
           fadeStrength={1} 
         />

@@ -95,7 +95,7 @@ export default function RightSidebar({ selectedAnchor, allAnchors, onClose }: Pr
             </div>
             <div className="detail-item">
               <span className="detail-label">PL Block</span>
-              <span className="detail-value" style={{ color: '#eab308' }}>{details.plName}</span>
+              <span className="detail-value" style={{ color: 'var(--accent-cyan)' }}>{details.plName}</span>
             </div>
           </div>
 
