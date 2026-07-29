@@ -361,10 +361,16 @@ def main():
     for f_idx in range(len(floors)):
         floor_group = [col[f_idx] for col in columns]
         
-        # Precompute nearest pillar distances and points for all anchors on this floor
-        dists_to_pillar = []
-        closest_pillar_points = []
-        for a in floor_group:
+        # Calculate centroid to sort radially
+        cx = sum(a['rhino_x'] for a in floor_group) / len(floor_group)
+        cy = sum(a['rhino_y'] for a in floor_group) / len(floor_group)
+        
+        radial_group = sorted(floor_group, key=lambda a: math.atan2(a['rhino_y'] - cy, a['rhino_x'] - cx))
+        
+        # Precompute nearest pillar distances and points for radial_group
+        dists_to_pillar_rad = []
+        closest_pillar_points_rad = []
+        for a in radial_group:
             anchor_2d = [a['rhino_x'], a['rhino_y']]
             min_d = float('inf')
             min_p_pt = None
@@ -373,8 +379,8 @@ def main():
                 if d < min_d:
                     min_d = d
                     min_p_pt = p_data['pts_3d'][idx]
-            dists_to_pillar.append(min_d)
-            closest_pillar_points.append(min_p_pt)
+            dists_to_pillar_rad.append(min_d)
+            closest_pillar_points_rad.append(min_p_pt)
             
         for i, a in enumerate(floor_group):
             three_x = a['rhino_x'] / 1000.0
@@ -392,61 +398,63 @@ def main():
             pillar_a_path, pillar_b_path = None, None
             
             if is_middle and len(pillars_data) >= 2:
+                r_idx = radial_group.index(a)
+                
                 # Find left pillar (step -1)
                 min_val_left = float('inf')
                 min_idx_left = -1
                 for step in range(1, 15):
-                    idx = (i - step) % len(floor_group)
-                    if dists_to_pillar[idx] < min_val_left:
-                        min_val_left = dists_to_pillar[idx]
+                    idx = (r_idx - step) % len(radial_group)
+                    if dists_to_pillar_rad[idx] < min_val_left:
+                        min_val_left = dists_to_pillar_rad[idx]
                         min_idx_left = idx
                         
                 path_left = []
                 dist_left = 0.0
-                curr = i
+                curr = r_idx
                 while curr != min_idx_left:
-                    a_curr = floor_group[curr]
+                    a_curr = radial_group[curr]
                     path_left.append([a_curr['rhino_x']/1000.0, three_y, -a_curr['rhino_y']/1000.0])
-                    nxt = (curr - 1) % len(floor_group)
-                    a_nxt = floor_group[nxt]
+                    nxt = (curr - 1) % len(radial_group)
+                    a_nxt = radial_group[nxt]
                     dx = a_nxt['rhino_x'] - a_curr['rhino_x']
                     dy = a_nxt['rhino_y'] - a_curr['rhino_y']
                     dist_left += (dx**2 + dy**2)**0.5
                     curr = nxt
                 
-                a_curr = floor_group[min_idx_left]
+                a_curr = radial_group[min_idx_left]
                 path_left.append([a_curr['rhino_x']/1000.0, three_y, -a_curr['rhino_y']/1000.0])
-                p_pt = closest_pillar_points[min_idx_left]
+                p_pt = closest_pillar_points_rad[min_idx_left]
                 path_left.append([p_pt[0]/1000.0, three_y, -p_pt[1]/1000.0])
-                dist_left += dists_to_pillar[min_idx_left]
+                dist_left += dists_to_pillar_rad[min_idx_left]
                 
                 # Find right pillar (step +1)
                 min_val_right = float('inf')
                 min_idx_right = -1
                 for step in range(1, 15):
-                    idx = (i + step) % len(floor_group)
-                    if dists_to_pillar[idx] < min_val_right:
-                        min_val_right = dists_to_pillar[idx]
+                    idx = (r_idx + step) % len(radial_group)
+                    if dists_to_pillar_rad[idx] < min_val_right:
+                        min_val_right = dists_to_pillar_rad[idx]
                         min_idx_right = idx
                         
                 path_right = []
                 dist_right = 0.0
-                curr = i
+                curr = r_idx
                 while curr != min_idx_right:
-                    a_curr = floor_group[curr]
+                    a_curr = radial_group[curr]
                     path_right.append([a_curr['rhino_x']/1000.0, three_y, -a_curr['rhino_y']/1000.0])
-                    nxt = (curr + 1) % len(floor_group)
-                    a_nxt = floor_group[nxt]
+                    nxt = (curr + 1) % len(radial_group)
+                    a_nxt = radial_group[nxt]
                     dx = a_nxt['rhino_x'] - a_curr['rhino_x']
                     dy = a_nxt['rhino_y'] - a_curr['rhino_y']
                     dist_right += (dx**2 + dy**2)**0.5
                     curr = nxt
                     
-                a_curr = floor_group[min_idx_right]
+                a_curr = radial_group[min_idx_right]
                 path_right.append([a_curr['rhino_x']/1000.0, three_y, -a_curr['rhino_y']/1000.0])
-                p_pt = closest_pillar_points[min_idx_right]
+                p_pt = closest_pillar_points_rad[min_idx_right]
                 path_right.append([p_pt[0]/1000.0, three_y, -p_pt[1]/1000.0])
-                dist_right += dists_to_pillar[min_idx_right]
+                dist_right += dists_to_pillar_rad[min_idx_right]
                 
                 pillar_a_dist = float(dist_left)
                 pillar_b_dist = float(dist_right)
