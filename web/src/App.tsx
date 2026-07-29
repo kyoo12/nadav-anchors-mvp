@@ -156,7 +156,7 @@ function App() {
           <button 
             onClick={toggleAll}
             style={{
-              background: 'none', border: 'none', color: 'var(--accent-blue)', 
+              background: 'var(--accent-blue)', border: 'none', color: 'white', borderRadius: '12px', padding: '0 16px', fontWeight: 600, 
               cursor: 'pointer', fontSize: '1rem', minHeight: '44px', minWidth: '44px', display: 'flex', alignItems: 'center', justifyContent: 'center'
             }}
           >
@@ -194,7 +194,7 @@ function App() {
       />
 
       <Canvas camera={{ position: [0, 40, 60], fov: 45 }}>
-        <color attach="background" args={['#f1f5f9']} />
+        <color attach="background" args={['#dbeafe']} />
         
         <ambientLight intensity={0.5} />
         <directionalLight position={[10, 20, 10]} intensity={1} />
