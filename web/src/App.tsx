@@ -52,7 +52,7 @@ const formatFloor = (f: number) => f === 8 ? 'Roof' : `Floor ${f}`;
 function App() {
   useEffect(() => {
     const link = document.createElement('link');
-    link.href = 'https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600;700&family=Josefin+Sans:wght@300;400;500;600;700&display=swap';
+    link.href = 'https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800;900&family=Roboto+Mono:wght@400;500;600;700&display=swap';
     link.rel = 'stylesheet';
     document.head.appendChild(link);
     return () => { document.head.removeChild(link); }
@@ -194,7 +194,7 @@ function App() {
       />
 
       <Canvas camera={{ position: [0, 40, 60], fov: 45 }}>
-        <color attach="background" args={['#dbeafe']} />
+        <color attach="background" args={['#020617']} />
         
         <ambientLight intensity={0.5} />
         <directionalLight position={[10, 20, 10]} intensity={1} />
