@@ -37,7 +37,16 @@ function CameraController({ selectedAnchor }: { selectedAnchor: Anchor | null })
 
 const formatFloor = (f: number) => f === 8 ? 'Roof' : `Floor ${f}`;
 
+
 function App() {
+  useEffect(() => {
+    const link = document.createElement('link');
+    link.href = 'https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600;700&family=Josefin+Sans:wght@300;400;500;600;700&display=swap';
+    link.rel = 'stylesheet';
+    document.head.appendChild(link);
+    return () => { document.head.removeChild(link); }
+  }, []);
+
   const [visibleFloors, setVisibleFloors] = useState<Set<number>>(new Set());
   const [showRegularAnchors, setShowRegularAnchors] = useState(true);
   const [floors, setFloors] = useState<number[]>([]);
@@ -108,7 +117,7 @@ function App() {
         transition={{ duration: 0.5, ease: "easeOut" }}
       >
         <div style={{ display: 'flex', alignItems: 'center', gap: '12px', marginBottom: '8px' }}>
-          <img src="/logo.png" alt="Logo" style={{ height: '40px', objectFit: 'contain' }} />
+          <img src="/logo.png" alt="Logo" style={{ height: '48px', objectFit: 'contain' }} />
           <h1 style={{ margin: 0 }}>Building Anchors</h1>
         </div>
         <p>Interactive 3D visualizer. Toggle floors below and click on an anchor for details.</p>
@@ -130,21 +139,21 @@ function App() {
         </form>
 
         <div style={{ marginBottom: '16px', display: 'flex', justifyContent: 'space-between' }}>
-          <span style={{ fontSize: '0.9rem', color: 'var(--text-muted)' }}>
+          <span style={{ fontSize: '1rem', minHeight: '44px', minWidth: '44px', display: 'flex', alignItems: 'center', justifyContent: 'center', color: 'var(--text-muted)' }}>
             Showing {anchors.filter(a => visibleFloors.has(a.floor)).length} / {anchors.length}
           </span>
           <button 
             onClick={toggleAll}
             style={{
               background: 'none', border: 'none', color: 'var(--accent-blue)', 
-              cursor: 'pointer', fontSize: '0.9rem'
+              cursor: 'pointer', fontSize: '1rem', minHeight: '44px', minWidth: '44px', display: 'flex', alignItems: 'center', justifyContent: 'center'
             }}
           >
             {visibleFloors.size === floors.length ? 'Hide All' : 'Show All'}
           </button>
         </div>
         
-        <label style={{ display: 'flex', alignItems: 'center', gap: '8px', marginBottom: '16px', fontSize: '0.9rem', cursor: 'pointer', color: 'var(--text-main)' }}>
+        <label style={{ display: 'flex', alignItems: 'center', gap: '8px', marginBottom: '16px', fontSize: '1rem', minHeight: '44px', cursor: 'pointer', color: 'var(--text-main)' }}>
           <input type="checkbox" checked={showRegularAnchors} onChange={(e) => setShowRegularAnchors(e.target.checked)} />
           Show Square Anchors
         </label>
