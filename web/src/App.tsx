@@ -142,6 +142,11 @@ function App() {
             {visibleFloors.size === floors.length ? 'Hide All' : 'Show All'}
           </button>
         </div>
+        
+        <label style={{ display: 'flex', alignItems: 'center', gap: '8px', marginBottom: '16px', fontSize: '0.9rem', cursor: 'pointer', color: 'var(--text-main)' }}>
+          <input type="checkbox" checked={showRegularAnchors} onChange={(e) => setShowRegularAnchors(e.target.checked)} />
+          Show Square Anchors
+        </label>
 
         <div className="floor-toggles">
           {floors.map(floor => {
@@ -196,6 +201,7 @@ function App() {
               visibleFloors={visibleFloors} 
               onSelectAnchor={setSelectedAnchor}
               selectedAnchorId={selectedAnchor?.id || null}
+              showRegularAnchors={showRegularAnchors}
             />
           )}
         </Suspense>

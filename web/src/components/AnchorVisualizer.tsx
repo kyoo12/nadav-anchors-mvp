@@ -60,6 +60,7 @@ interface Props {
   visibleFloors: Set<number>;
   onSelectAnchor: (anchor: Anchor | null) => void;
   selectedAnchorId: string | null;
+  showRegularAnchors?: boolean;
 }
 
 const halfGeometry = new THREE.BoxGeometry(0.6, 0.3, 0.15);
@@ -74,7 +75,7 @@ const plateMaterial = new THREE.MeshStandardMaterial({
 // Pre-allocate a single dummy object to prevent GC stuttering in loops
 const dummy = new THREE.Object3D();
 
-export default function AnchorVisualizer({ anchors, visibleFloors, onSelectAnchor, selectedAnchorId }: Props) {
+export default function AnchorVisualizer({ anchors, visibleFloors, onSelectAnchor, selectedAnchorId, showRegularAnchors = true }: Props) {
   const meshRefPL = useRef<THREE.InstancedMesh>(null);
   const meshRefAN = useRef<THREE.InstancedMesh>(null);
   const meshRefSpherePL = useRef<THREE.InstancedMesh>(null);
@@ -86,7 +87,7 @@ export default function AnchorVisualizer({ anchors, visibleFloors, onSelectAncho
     return anchors.filter(a => visibleFloors.has(a.floor));
   }, [anchors, visibleFloors]);
 
-  const regularAnchors = useMemo(() => visibleAnchors.filter(a => !a.isMiddleAnchor), [visibleAnchors]);
+  const regularAnchors = useMemo(() => showRegularAnchors ? visibleAnchors.filter(a => !a.isMiddleAnchor) : [], [visibleAnchors, showRegularAnchors]);
   const middleAnchors = useMemo(() => visibleAnchors.filter(a => a.isMiddleAnchor), [visibleAnchors]);
 
 
