@@ -430,6 +430,26 @@ def main():
                         else:
                             return name_b, tree_b, min_dist_b, idx_b
 
+                    def trim_path(raw_path, p_pt_2d, m_pt_2d):
+                        trimmed = [raw_path[0]]
+                        MP_x = p_pt_2d[0] - m_pt_2d[0]
+                        MP_y = p_pt_2d[1] - m_pt_2d[1]
+                        for pt in raw_path[1:-1]:
+                            a_x = pt[0] * 1000.0
+                            a_y = -pt[2] * 1000.0
+                            PA_x = a_x - p_pt_2d[0]
+                            PA_y = a_y - p_pt_2d[1]
+                            if MP_x * PA_x + MP_y * PA_y > 0:
+                                break
+                            trimmed.append(pt)
+                        trimmed.append(raw_path[-1])
+                        total_dist = 0.0
+                        for i in range(len(trimmed)-1):
+                            dx = trimmed[i+1][0] - trimmed[i][0]
+                            dz = trimmed[i+1][2] - trimmed[i][2]
+                            total_dist += (dx**2 + dz**2)**0.5
+                        return trimmed, total_dist * 1000.0
+                        
                     # Trace left (-1)
                     target_name_left, target_tree_left, _, min_idx_left = find_pillar_in_dir(-1)
                     path_left = []
@@ -448,7 +468,8 @@ def main():
                     d, idx_p = target_tree_left['tree'].query([a_curr['rhino_x'], a_curr['rhino_y']])
                     p_pt = target_tree_left['pts_3d'][idx_p]
                     path_left.append([p_pt[0]/1000.0, three_y, -p_pt[1]/1000.0])
-                    dist_left += d
+                    
+                    path_left, dist_left = trim_path(path_left, [p_pt[0], p_pt[1]], [a['rhino_x'], a['rhino_y']])
                     
                     # Trace right (+1)
                     target_name_right, target_tree_right, _, min_idx_right = find_pillar_in_dir(+1)
@@ -468,7 +489,8 @@ def main():
                     d, idx_p = target_tree_right['tree'].query([a_curr['rhino_x'], a_curr['rhino_y']])
                     p_pt = target_tree_right['pts_3d'][idx_p]
                     path_right.append([p_pt[0]/1000.0, three_y, -p_pt[1]/1000.0])
-                    dist_right += d
+                    
+                    path_right, dist_right = trim_path(path_right, [p_pt[0], p_pt[1]], [a['rhino_x'], a['rhino_y']])
                     
                     pillar_a_dist = float(dist_left)
                     pillar_b_dist = float(dist_right)
