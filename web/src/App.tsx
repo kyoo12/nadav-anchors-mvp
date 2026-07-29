@@ -98,6 +98,24 @@ function App() {
     });
   };
 
+  const exportCSV = () => {
+    const visibleAnchors = anchors.filter(a => visibleFloors.has(a.floor));
+    const header = "PointID,X,Y,Z,Floor,Type,NearestGridX,OffsetX,NearestGridY,OffsetY,WallGap\\n";
+    const rows = visibleAnchors.map(a => 
+      `${a.id},${a.x.toFixed(3)},${a.y.toFixed(3)},${a.z.toFixed(3)},${a.floor},${a.metadata},${a.nearestGridX},${(a.offsetX || 0).toFixed(1)},${a.nearestGridY},${(a.offsetY || 0).toFixed(1)},${(a.distanceToConcrete || 0).toFixed(1)}`
+    ).join("\\n");
+    
+    const blob = new Blob([header + rows], { type: 'text/csv' });
+    const url = window.URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.setAttribute('hidden', '');
+    a.setAttribute('href', url);
+    a.setAttribute('download', 'nadav_anchors_export.csv');
+    document.body.appendChild(a);
+    a.click();
+    document.body.removeChild(a);
+  };
+
   const toggleAll = () => {
     if (visibleFloors.size === floors.length) {
       setVisibleFloors(new Set());
@@ -169,6 +187,29 @@ function App() {
           <input type="checkbox" checked={showRegularAnchors} onChange={(e) => setShowRegularAnchors(e.target.checked)} />
           Show Square Anchors
         </label>
+        
+        <button 
+          onClick={exportCSV}
+          style={{
+            background: 'rgba(0, 240, 255, 0.1)',
+            border: '1px solid var(--accent-blue)',
+            color: 'var(--text-main)',
+            borderRadius: '12px',
+            padding: '0 16px',
+            marginBottom: '24px',
+            cursor: 'pointer',
+            fontSize: '1rem',
+            minHeight: '48px',
+            width: '100%',
+            fontWeight: 600,
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'center',
+            boxShadow: '0 0 10px rgba(0, 240, 255, 0.2)'
+          }}
+        >
+          ?? Export Visible CSV
+        </button>
 
         <div className="floor-toggles">
           {floors.map(floor => {

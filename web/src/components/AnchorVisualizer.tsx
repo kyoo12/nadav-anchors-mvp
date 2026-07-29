@@ -24,6 +24,10 @@ export interface Anchor {
   pitch: number;
   yaw: number;
   metadata?: string;
+  nearestGridX?: string;
+  offsetX?: number;
+  nearestGridY?: string;
+  offsetY?: number;
   distanceToConcrete?: number;
   distanceToFloatingFloor?: number;
   isMiddleAnchor?: boolean;

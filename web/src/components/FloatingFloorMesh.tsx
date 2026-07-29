@@ -12,13 +12,14 @@ export default function FloatingFloorMesh() {
       if (child instanceof THREE.Mesh) {
         child.raycast = () => null;
         child.material = new THREE.MeshPhysicalMaterial({
-          color: '#00F0FF', 
+          color: '#94a3b8', 
           metalness: 0.1,
           roughness: 0.8,
           transparent: true,
-          opacity: 0.15,
+          opacity: 0.5,
+          depthWrite: false,
           side: THREE.DoubleSide,
-          wireframe: true, 
+          wireframe: false, 
         });
       }
     });
