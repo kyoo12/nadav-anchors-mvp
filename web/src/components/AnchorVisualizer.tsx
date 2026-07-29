@@ -20,6 +20,8 @@ export interface Anchor {
   pillarBDistance?: number;
   pillarAPath?: [number, number, number][];
   pillarBPath?: [number, number, number][];
+  pillarALabel?: string;
+  pillarBLabel?: string;
 }
 
 // Pre-allocate colors to prevent memory leaks during rapid hovering
