@@ -106,7 +106,10 @@ function App() {
         animate={{ y: 0, opacity: 1 }}
         transition={{ duration: 0.5, ease: "easeOut" }}
       >
-        <h1>Building Anchors</h1>
+        <div style={{ display: 'flex', alignItems: 'center', gap: '12px', marginBottom: '8px' }}>
+          <img src="/logo.png" alt="Logo" style={{ height: '40px', objectFit: 'contain' }} />
+          <h1 style={{ margin: 0 }}>Building Anchors</h1>
+        </div>
         <p>Interactive 3D visualizer. Toggle floors below and click on an anchor for details.</p>
         
         <form onSubmit={handleSearch} style={{ display: 'flex', gap: '8px', marginBottom: '20px' }}>
