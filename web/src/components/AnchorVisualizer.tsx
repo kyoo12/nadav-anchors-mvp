@@ -63,7 +63,8 @@ interface Props {
 }
 
 const halfGeometry = new THREE.BoxGeometry(0.6, 0.3, 0.15);
-const halfSphereGeometry = new THREE.SphereGeometry(0.4, 32, 16, 0, Math.PI);
+const topSphereGeometry = new THREE.SphereGeometry(0.4, 32, 16, 0, Math.PI * 2, 0, Math.PI / 2);
+const bottomSphereGeometry = new THREE.SphereGeometry(0.4, 32, 16, 0, Math.PI * 2, Math.PI / 2, Math.PI / 2);
 const plateMaterial = new THREE.MeshStandardMaterial({ 
   color: '#ffffff', // Base color white so instance colors map perfectly
   metalness: 0.5,
@@ -114,7 +115,7 @@ export default function AnchorVisualizer({ anchors, visibleFloors, onSelectAncho
         dummy.position.set(anchor.x, anchor.y, anchor.z);
         dummy.rotation.set(anchor.pitch, anchor.yaw, 0, 'YXZ');
         dummy.translateY(isSphere ? 0 : 0.15); // Spheres stay at center, just rotated
-        if (isSphere) dummy.rotateZ(Math.PI); // Top hemisphere
+        
         dummy.scale.set(s, s, s);
         dummy.updateMatrix();
         refAN.current!.setMatrixAt(i, dummy.matrix);
@@ -172,7 +173,7 @@ export default function AnchorVisualizer({ anchors, visibleFloors, onSelectAncho
     dummy.position.set(anchor.x, anchor.y, anchor.z);
     dummy.rotation.set(anchor.pitch, anchor.yaw, 0, 'YXZ');
     dummy.translateY(isSphere ? 0 : 0.15);
-    if (isSphere) dummy.rotateZ(Math.PI);
+    
     dummy.scale.set(scale, scale, scale);
     dummy.updateMatrix();
     refAN.current!.setMatrixAt(selectedIdx, dummy.matrix);
@@ -225,14 +226,14 @@ export default function AnchorVisualizer({ anchors, visibleFloors, onSelectAncho
       {/* Middle Spheres */}
       <instancedMesh
         ref={meshRefSpherePL}
-        args={[halfSphereGeometry, plateMaterial, middleAnchors.length]}
+        args={[bottomSphereGeometry, plateMaterial, middleAnchors.length]}
         onPointerOver={handlePointerOver(middleAnchors)}
         onPointerOut={handlePointerOut}
         onClick={(e) => { e.stopPropagation(); if (e.instanceId !== undefined) onSelectAnchor(selectedAnchorId === middleAnchors[e.instanceId].id ? null : middleAnchors[e.instanceId]); }}
       />
       <instancedMesh
         ref={meshRefSphereAN}
-        args={[halfSphereGeometry, plateMaterial, middleAnchors.length]}
+        args={[topSphereGeometry, plateMaterial, middleAnchors.length]}
         onPointerOver={handlePointerOver(middleAnchors)}
         onPointerOut={handlePointerOut}
         onClick={(e) => { e.stopPropagation(); if (e.instanceId !== undefined) onSelectAnchor(selectedAnchorId === middleAnchors[e.instanceId].id ? null : middleAnchors[e.instanceId]); }}
