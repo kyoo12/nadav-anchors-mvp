@@ -1,3 +1,14 @@
+/**
+ * AnchorVisualizer.tsx
+ * 
+ * Core 3D rendering component using React Three Fiber.
+ * 
+ * Performance & Architecture:
+ * - Uses InstancedMesh for rendering thousands of standard square anchors in a single draw call.
+ * - Split-sphere geometries (Top/Bottom hemispheres) for Middle Anchors to color-code AN vs PL connections without Z-fighting.
+ * - Dynamic Line drawing for calculated measurement paths connecting anchors to the structural pillars.
+ * - Reactively rebuilds matrices only when the visible floors toggle changes to maintain 60 FPS.
+ */
 import { useRef, useMemo, useState, useEffect } from 'react';
 import { useFrame } from '@react-three/fiber';
 import * as THREE from 'three';

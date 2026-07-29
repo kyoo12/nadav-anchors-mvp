@@ -1,3 +1,14 @@
+/*
+ * index.css
+ * 
+ * Global stylesheet implementing the Tablet-First UI/UX overhaul.
+ * Design Pattern: "Hero-Centric + Exaggerated Minimalism"
+ * Key Features:
+ * - Cinzel & Josefin Sans font pairing
+ * - Blueprint Blue (#3B82F6) & Safety Orange (#F97316) color scheme
+ * - Heavy glassmorphism (12px backdrop blur)
+ * - Minimum 48px touch targets for Galaxy Tab Ultra compatibility
+ */
 :root {
   --bg-dark: #f1f5f9;
   --bg-panel: #ffffff;
