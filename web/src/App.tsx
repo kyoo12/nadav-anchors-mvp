@@ -17,6 +17,7 @@ import { motion } from 'framer-motion'
 import RightSidebar from './components/RightSidebar'
 import LoadingScreen from './components/LoadingScreen'
 import BuildingMesh from './components/BuildingMesh'
+import FloatingFloorMesh from './components/FloatingFloorMesh'
 import { Suspense } from 'react'
 import { useQuery } from '@tanstack/react-query'
 import * as THREE from 'three'
@@ -216,6 +217,7 @@ function App() {
 
         <Suspense fallback={<LoadingScreen />}>
           <BuildingMesh />
+          <FloatingFloorMesh />
           {anchors.length > 0 && !isLoading && !isError && (
             <AnchorVisualizer 
               anchors={anchors} 
