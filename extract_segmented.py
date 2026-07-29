@@ -370,7 +370,7 @@ def main():
             is_roof = (f_idx == len(floors) - 1)
             floor_prefix = "Roof" if is_roof else f"F{f_idx}"
             
-            middle_indices = [4, 13, 22, 31, 40, 58, 73, 70, 61, 59]
+            middle_indices = [4, 13, 22, 31, 40, 58, 73, 70, 61, 49]
             is_middle = (i in middle_indices)
             
             pillar_a_dist, pillar_b_dist = None, None

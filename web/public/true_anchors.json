@@ -1083,11 +1083,19 @@
     "nearestGridY": "N/A",
     "offsetY": 0.0,
     "distanceToFloatingFloor": -660.0538400470195,
-    "isMiddleAnchor": false,
-    "pillarADistance": null,
-    "pillarBDistance": null,
-    "pillarAPoint": null,
-    "pillarBPoint": null
+    "isMiddleAnchor": true,
+    "pillarADistance": 5077.175605870207,
+    "pillarBDistance": 5221.760876326596,
+    "pillarAPoint": [
+      43.0249609375,
+      4.53994615995298,
+      98.2192578125
+    ],
+    "pillarBPoint": [
+      33.350125,
+      4.53994615995298,
+      101.5816171875
+    ]
   },
   {
     "id": "F0_50",
@@ -1301,19 +1309,11 @@
     "nearestGridY": "N/A",
     "offsetY": 0.0,
     "distanceToFloatingFloor": -660.0538400451642,
-    "isMiddleAnchor": true,
-    "pillarADistance": 240.99380755937395,
-    "pillarBDistance": 10057.326439662183,
-    "pillarAPoint": [
-      33.04206640625,
-      4.539946159954836,
-      102.2166171875
-    ],
-    "pillarBPoint": [
-      22.79228515625,
-      4.539946159954836,
-      103.1761328125
-    ]
+    "isMiddleAnchor": false,
+    "pillarADistance": null,
+    "pillarBDistance": null,
+    "pillarAPoint": null,
+    "pillarBPoint": null
   },
   {
     "id": "F0_60",
@@ -2801,11 +2801,19 @@
     "nearestGridY": "N/A",
     "offsetY": 0.0,
     "distanceToFloatingFloor": 714.0000001210428,
-    "isMiddleAnchor": false,
-    "pillarADistance": null,
-    "pillarBDistance": null,
-    "pillarAPoint": null,
-    "pillarBPoint": null
+    "isMiddleAnchor": true,
+    "pillarADistance": 5113.365537766786,
+    "pillarBDistance": 5283.015052610084,
+    "pillarAPoint": [
+      43.22295703125,
+      5.964000000121043,
+      98.6402890625
+    ],
+    "pillarBPoint": [
+      33.4483828125,
+      5.964000000121043,
+      102.0016171875
+    ]
   },
   {
     "id": "F1_50",
@@ -3019,19 +3027,11 @@
     "nearestGridY": "N/A",
     "offsetY": 0.0,
     "distanceToFloatingFloor": 714.0000001228473,
-    "isMiddleAnchor": true,
-    "pillarADistance": 233.68042358923938,
-    "pillarBDistance": 10141.037933439542,
-    "pillarAPoint": [
-      33.15305078125,
-      5.964000000122847,
-      102.6166171875
-    ],
-    "pillarBPoint": [
-      22.82841796875,
-      5.964000000122847,
-      103.5761328125
-    ]
+    "isMiddleAnchor": false,
+    "pillarADistance": null,
+    "pillarBDistance": null,
+    "pillarAPoint": null,
+    "pillarBPoint": null
   },
   {
     "id": "F1_60",
@@ -4519,11 +4519,19 @@
     "nearestGridY": "N/A",
     "offsetY": 0.0,
     "distanceToFloatingFloor": 664.0000001217722,
-    "isMiddleAnchor": false,
-    "pillarADistance": null,
-    "pillarBDistance": null,
-    "pillarAPoint": null,
-    "pillarBPoint": null
+    "isMiddleAnchor": true,
+    "pillarADistance": 5147.801104771371,
+    "pillarBDistance": 5349.772180422183,
+    "pillarAPoint": [
+      43.437015625,
+      9.764000000121772,
+      99.1014453125
+    ],
+    "pillarBPoint": [
+      33.54924609375,
+      9.764000000121772,
+      102.4516171875
+    ]
   },
   {
     "id": "F2_50",
@@ -4737,19 +4745,11 @@
     "nearestGridY": "N/A",
     "offsetY": 0.0,
     "distanceToFloatingFloor": 664.0000001236494,
-    "isMiddleAnchor": true,
-    "pillarADistance": 201.49503994273147,
-    "pillarBDistance": 10240.673000522858,
-    "pillarAPoint": [
-      33.271125,
-      9.76400000012365,
-      103.1279765625
-    ],
-    "pillarBPoint": [
-      22.88258984375,
-      9.76400000012365,
-      104.1561328125
-    ]
+    "isMiddleAnchor": false,
+    "pillarADistance": null,
+    "pillarBDistance": null,
+    "pillarAPoint": null,
+    "pillarBPoint": null
   },
   {
     "id": "F2_60",
@@ -6237,11 +6237,19 @@
     "nearestGridY": "N/A",
     "offsetY": 0.0,
     "distanceToFloatingFloor": 689.0000001220633,
-    "isMiddleAnchor": false,
-    "pillarADistance": null,
-    "pillarBDistance": null,
-    "pillarAPoint": null,
-    "pillarBPoint": null
+    "isMiddleAnchor": true,
+    "pillarADistance": 5162.191991241658,
+    "pillarBDistance": 5375.871310975914,
+    "pillarAPoint": [
+      43.5135625,
+      13.639000000122063,
+      99.26465625
+    ],
+    "pillarBPoint": [
+      33.587921875,
+      13.639000000122063,
+      102.6228203125
+    ]
   },
   {
     "id": "F3_50",
@@ -6455,19 +6463,11 @@
     "nearestGridY": "N/A",
     "offsetY": 0.0,
     "distanceToFloatingFloor": 689.0000001239441,
-    "isMiddleAnchor": true,
-    "pillarADistance": 199.1480357898635,
-    "pillarBDistance": 10272.799776858252,
-    "pillarAPoint": [
-      33.321890625,
-      13.639000000123945,
-      103.306765625
-    ],
-    "pillarBPoint": [
-      22.98110546875,
-      13.639000000123945,
-      104.94965625
-    ]
+    "isMiddleAnchor": false,
+    "pillarADistance": null,
+    "pillarBDistance": null,
+    "pillarAPoint": null,
+    "pillarBPoint": null
   },
   {
     "id": "F3_60",
@@ -7955,11 +7955,19 @@
     "nearestGridY": "N/A",
     "offsetY": 0.0,
     "distanceToFloatingFloor": 762.0000001217122,
-    "isMiddleAnchor": false,
-    "pillarADistance": null,
-    "pillarBDistance": null,
-    "pillarAPoint": null,
-    "pillarBPoint": null
+    "isMiddleAnchor": true,
+    "pillarADistance": 5145.192535067354,
+    "pillarBDistance": 5344.4981238861465,
+    "pillarAPoint": [
+      43.437015625,
+      17.562000000121714,
+      99.1014453125
+    ],
+    "pillarBPoint": [
+      33.54011328125,
+      17.562000000121714,
+      102.4116171875
+    ]
   },
   {
     "id": "F4_50",
@@ -8173,19 +8181,11 @@
     "nearestGridY": "N/A",
     "offsetY": 0.0,
     "distanceToFloatingFloor": 762.0000001235894,
-    "isMiddleAnchor": true,
-    "pillarADistance": 203.3915863115698,
-    "pillarBDistance": 10233.359140784412,
-    "pillarAPoint": [
-      33.25333984375,
-      17.56200000012359,
-      103.0654921875
-    ],
-    "pillarBPoint": [
-      22.878775390625,
-      17.56200000012359,
-      104.1161328125
-    ]
+    "isMiddleAnchor": false,
+    "pillarADistance": null,
+    "pillarBDistance": null,
+    "pillarAPoint": null,
+    "pillarBPoint": null
   },
   {
     "id": "F4_60",
@@ -9673,11 +9673,19 @@
     "nearestGridY": "N/A",
     "offsetY": 0.0,
     "distanceToFloatingFloor": 860.00000012077,
-    "isMiddleAnchor": false,
-    "pillarADistance": null,
-    "pillarBDistance": null,
-    "pillarAPoint": null,
-    "pillarBPoint": null
+    "isMiddleAnchor": true,
+    "pillarADistance": 5099.455070451651,
+    "pillarBDistance": 5259.176306540358,
+    "pillarAPoint": [
+      43.15039453125,
+      21.51000000012077,
+      98.4859921875
+    ],
+    "pillarBPoint": [
+      33.40909765625,
+      21.51000000012077,
+      101.8316171875
+    ]
   },
   {
     "id": "F5_50",
@@ -9891,19 +9899,11 @@
     "nearestGridY": "N/A",
     "offsetY": 0.0,
     "distanceToFloatingFloor": 860.000000122629,
-    "isMiddleAnchor": true,
-    "pillarADistance": 236.01397571473422,
-    "pillarBDistance": 10113.695552527404,
-    "pillarAPoint": [
-      33.1170234375,
-      21.51000000012263,
-      102.486734375
-    ],
-    "pillarBPoint": [
-      22.81771484375,
-      21.51000000012263,
-      103.4561328125
-    ]
+    "isMiddleAnchor": false,
+    "pillarADistance": null,
+    "pillarBDistance": null,
+    "pillarAPoint": null,
+    "pillarBPoint": null
   },
   {
     "id": "F5_60",
@@ -11391,11 +11391,19 @@
     "nearestGridY": "N/A",
     "offsetY": 0.0,
     "distanceToFloatingFloor": 667.0000001192166,
-    "isMiddleAnchor": false,
-    "pillarADistance": null,
-    "pillarBDistance": null,
-    "pillarAPoint": null,
-    "pillarBPoint": null
+    "isMiddleAnchor": true,
+    "pillarADistance": 5021.22418519735,
+    "pillarBDistance": 5130.499527969718,
+    "pillarAPoint": [
+      42.7193046875,
+      25.167000000119216,
+      97.569265625
+    ],
+    "pillarBPoint": [
+      33.18998046875,
+      25.167000000119216,
+      100.9116171875
+    ]
   },
   {
     "id": "F6_50",
@@ -11609,19 +11617,11 @@
     "nearestGridY": "N/A",
     "offsetY": 0.0,
     "distanceToFloatingFloor": 667.0000001211229,
-    "isMiddleAnchor": true,
-    "pillarADistance": 248.39726537124417,
-    "pillarBDistance": 9926.155189890076,
-    "pillarAPoint": [
-      32.85412109375,
-      25.167000000121124,
-      101.5566171875
-    ],
-    "pillarBPoint": [
-      22.73549609375,
-      25.167000000121124,
-      102.5761328125
-    ]
+    "isMiddleAnchor": false,
+    "pillarADistance": null,
+    "pillarBDistance": null,
+    "pillarAPoint": null,
+    "pillarBPoint": null
   },
   {
     "id": "F6_60",
@@ -13109,11 +13109,19 @@
     "nearestGridY": "N/A",
     "offsetY": 0.0,
     "distanceToFloatingFloor": 860.0000001169246,
-    "isMiddleAnchor": false,
-    "pillarADistance": null,
-    "pillarBDistance": null,
-    "pillarAPoint": null,
-    "pillarBPoint": null
+    "isMiddleAnchor": true,
+    "pillarADistance": 4904.931073301782,
+    "pillarBDistance": 4936.093996255466,
+    "pillarAPoint": [
+      42.0886015625,
+      29.320000000116924,
+      96.2280390625
+    ],
+    "pillarBPoint": [
+      32.83258203125,
+      29.320000000116924,
+      99.38603125
+    ]
   },
   {
     "id": "F7_50",
@@ -13327,19 +13335,11 @@
     "nearestGridY": "N/A",
     "offsetY": 0.0,
     "distanceToFloatingFloor": 860.0000001187946,
-    "isMiddleAnchor": true,
-    "pillarADistance": 399.0070726817107,
-    "pillarBDistance": 9662.459085207603,
-    "pillarAPoint": [
-      32.58415234375,
-      29.320000000118796,
-      100.1216171875
-    ],
-    "pillarBPoint": [
-      22.60071484375,
-      29.320000000118796,
-      101.361734375
-    ]
+    "isMiddleAnchor": false,
+    "pillarADistance": null,
+    "pillarBDistance": null,
+    "pillarAPoint": null,
+    "pillarBPoint": null
   },
   {
     "id": "F7_60",
@@ -14827,11 +14827,19 @@
     "nearestGridY": "N/A",
     "offsetY": 0.0,
     "distanceToFloatingFloor": 2639.0000001154767,
-    "isMiddleAnchor": false,
-    "pillarADistance": null,
-    "pillarBDistance": null,
-    "pillarAPoint": null,
-    "pillarBPoint": null
+    "isMiddleAnchor": true,
+    "pillarADistance": 4819.521717691641,
+    "pillarBDistance": 4832.22373517474,
+    "pillarAPoint": [
+      32.718822265625,
+      31.099000000115478,
+      98.8775078125
+    ],
+    "pillarBPoint": [
+      41.69267578125,
+      31.099000000115478,
+      95.3859921875
+    ]
   },
   {
     "id": "Roof_50",
@@ -15045,19 +15053,11 @@
     "nearestGridY": "N/A",
     "offsetY": 0.0,
     "distanceToFloatingFloor": 2639.000000117325,
-    "isMiddleAnchor": true,
-    "pillarADistance": 466.3146882542622,
-    "pillarBDistance": 9535.392077502973,
-    "pillarAPoint": [
-      32.381724609375,
-      31.099000000117325,
-      99.2016171875
-    ],
-    "pillarBPoint": [
-      22.581365234375,
-      31.099000000117325,
-      101.198171875
-    ]
+    "isMiddleAnchor": false,
+    "pillarADistance": null,
+    "pillarBDistance": null,
+    "pillarAPoint": null,
+    "pillarBPoint": null
   },
   {
     "id": "Roof_60",
