@@ -370,7 +370,7 @@ def main():
             is_roof = (f_idx == len(floors) - 1)
             floor_prefix = "Roof" if is_roof else f"F{f_idx}"
             
-            middle_indices = [4, 13, 22, 31, 40, 58, 73, 70, 61, 41]
+            middle_indices = [4, 13, 22, 31, 40, 58, 73, 70, 61, 59]
             is_middle = (i in middle_indices)
             
             pillar_a_dist, pillar_b_dist = None, None
@@ -386,8 +386,10 @@ def main():
                 p_dists.sort(key=lambda x: x[0])
                 pillar_a_dist = float(p_dists[0][0])
                 pillar_b_dist = float(p_dists[1][0])
-                pillar_a_pt = [p_dists[0][1][0] / 1000.0, p_dists[0][1][2] / 1000.0, -p_dists[0][1][1] / 1000.0]
-                pillar_b_pt = [p_dists[1][1][0] / 1000.0, p_dists[1][1][2] / 1000.0, -p_dists[1][1][1] / 1000.0]
+                # Force the pillar target point to have the exact same elevation (three_y) as the anchor 
+                # to create a perfectly horizontal verification line (Euclidean side-to-side)
+                pillar_a_pt = [p_dists[0][1][0] / 1000.0, three_y, -p_dists[0][1][1] / 1000.0]
+                pillar_b_pt = [p_dists[1][1][0] / 1000.0, three_y, -p_dists[1][1][1] / 1000.0]
 
             export_anchors.append({
                 'id': f"{floor_prefix}_{i}",
