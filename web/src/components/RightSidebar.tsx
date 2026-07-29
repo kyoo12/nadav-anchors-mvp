@@ -129,6 +129,22 @@ export default function RightSidebar({ selectedAnchor, allAnchors, onClose }: Pr
               <span className="detail-label">Distance to Right Neighbor</span>
               <span className="detail-value">{details.right} {details.right !== 'N/A' && 'mm'}</span>
             </div>
+            {selectedAnchor.isMiddleAnchor && (
+              <>
+                <div className="detail-item">
+                  <span className="detail-label" style={{ color: 'var(--accent-orange)' }}>Distance to Pillar A</span>
+                  <span className="detail-value">
+                    {selectedAnchor.pillarADistance !== undefined ? `${selectedAnchor.pillarADistance.toFixed(1)} mm` : 'N/A'}
+                  </span>
+                </div>
+                <div className="detail-item">
+                  <span className="detail-label" style={{ color: 'var(--accent-orange)' }}>Distance to Pillar B</span>
+                  <span className="detail-value">
+                    {selectedAnchor.pillarBDistance !== undefined ? `${selectedAnchor.pillarBDistance.toFixed(1)} mm` : 'N/A'}
+                  </span>
+                </div>
+              </>
+            )}
             <div className="detail-item">
               <span className="detail-label">Distance to Anchor Above</span>
               <span className="detail-value">{details.above} {details.above !== 'N/A' && 'mm'}</span>

@@ -1,7 +1,7 @@
 import { useRef, useMemo, useState, useEffect } from 'react';
 import { useFrame } from '@react-three/fiber';
 import * as THREE from 'three';
-import { Html } from '@react-three/drei';
+import { Html, Line } from '@react-three/drei';
 import { motion, AnimatePresence } from 'framer-motion';
 
 export interface Anchor {
@@ -15,6 +15,11 @@ export interface Anchor {
   metadata?: string;
   distanceToConcrete?: number;
   distanceToFloatingFloor?: number;
+  isMiddleAnchor?: boolean;
+  pillarADistance?: number;
+  pillarBDistance?: number;
+  pillarAPoint?: [number, number, number];
+  pillarBPoint?: [number, number, number];
 }
 
 // Pre-allocate colors to prevent memory leaks during rapid hovering
@@ -56,6 +61,7 @@ interface Props {
 }
 
 const halfGeometry = new THREE.BoxGeometry(0.6, 0.3, 0.15);
+const halfSphereGeometry = new THREE.SphereGeometry(0.4, 32, 16, 0, Math.PI);
 const plateMaterial = new THREE.MeshStandardMaterial({ 
   color: '#ffffff', // Base color white so instance colors map perfectly
   metalness: 0.5,
@@ -68,144 +74,179 @@ const dummy = new THREE.Object3D();
 export default function AnchorVisualizer({ anchors, visibleFloors, onSelectAnchor, selectedAnchorId }: Props) {
   const meshRefPL = useRef<THREE.InstancedMesh>(null);
   const meshRefAN = useRef<THREE.InstancedMesh>(null);
-  const [hoveredIdx, setHoveredIdx] = useState<number | null>(null);
+  const meshRefSpherePL = useRef<THREE.InstancedMesh>(null);
+  const meshRefSphereAN = useRef<THREE.InstancedMesh>(null);
+  const [hoveredAnchorId, setHoveredAnchorId] = useState<string | null>(null);
 
   // Filter anchors based on visible floors
   const visibleAnchors = useMemo(() => {
     return anchors.filter(a => visibleFloors.has(a.floor));
   }, [anchors, visibleFloors]);
 
+  const regularAnchors = useMemo(() => visibleAnchors.filter(a => !a.isMiddleAnchor), [visibleAnchors]);
+  const middleAnchors = useMemo(() => visibleAnchors.filter(a => a.isMiddleAnchor), [visibleAnchors]);
+
+
   // (Rail lines removed to declutter view)
 
   // Setup initial matrices and base colors
   useEffect(() => {
-    if (!meshRefPL.current || !meshRefAN.current) return;
+    if (!meshRefPL.current || !meshRefAN.current || !meshRefSpherePL.current || !meshRefSphereAN.current) return;
     
-    visibleAnchors.forEach((anchor, i) => {
-      const isSelected = anchor.id === selectedAnchorId;
-      const isHovered = hoveredIdx === i;
-      const s = isSelected ? 1.15 : (isHovered ? 1.2 : 1.0);
+    const applyMatrices = (
+      anchorsList: Anchor[],
+      refAN: any,
+      refPL: any,
+      isSphere: boolean
+    ) => {
+      anchorsList.forEach((anchor: Anchor, i: number) => {
+        const isSelected = anchor.id === selectedAnchorId;
+        const isHovered = anchor.id === hoveredAnchorId;
+        const s = isSelected ? (isSphere ? 1.7 : 1.15) : (isHovered ? (isSphere ? 1.8 : 1.2) : (isSphere ? 1.5 : 1.0));
+        
+        const metaParts = (anchor.metadata || '').split('|');
+        const anName = metaParts[0]?.trim() || '';
+        const plName = metaParts[1]?.trim() || '';
+        
+        // --- AN MESH (Top Half) ---
+        dummy.position.set(anchor.x, anchor.y, anchor.z);
+        dummy.rotation.set(anchor.pitch, anchor.yaw, 0, 'YXZ');
+        dummy.translateY(isSphere ? 0 : 0.15); // Spheres stay at center, just rotated
+        if (isSphere) dummy.rotateZ(Math.PI); // Top hemisphere
+        dummy.scale.set(s, s, s);
+        dummy.updateMatrix();
+        refAN.current!.setMatrixAt(i, dummy.matrix);
+        
+        if (isSelected) refAN.current!.setColorAt(i, COLOR_WHITE);
+        else if (isHovered) refAN.current!.setColorAt(i, COLOR_CYAN);
+        else refAN.current!.setColorAt(i, getAnColor(anName)); // e.g. Blue
+        
+        // --- PL MESH (Bottom Half) ---
+        dummy.position.set(anchor.x, anchor.y, anchor.z);
+        dummy.rotation.set(anchor.pitch, anchor.yaw, 0, 'YXZ');
+        dummy.translateY(isSphere ? 0 : -0.15); 
+        dummy.scale.set(s, s, s);
+        dummy.updateMatrix();
+        refPL.current!.setMatrixAt(i, dummy.matrix);
+        
+        if (isSelected) refPL.current!.setColorAt(i, COLOR_WHITE);
+        else if (isHovered) refPL.current!.setColorAt(i, COLOR_CYAN);
+        else refPL.current!.setColorAt(i, getPlColor(plName)); // e.g. Orange
+      });
       
-      const metaParts = (anchor.metadata || '').split('|');
-      const anName = metaParts[0]?.trim() || '';
-      const plName = metaParts[1]?.trim() || '';
-      
-      // --- AN MESH (Top Half) ---
-      dummy.position.set(anchor.x, anchor.y, anchor.z);
-      dummy.rotation.set(anchor.pitch, anchor.yaw, 0, 'YXZ');
-      dummy.translateY(0.15); // Move UP
-      dummy.scale.set(s, s, s);
-      dummy.updateMatrix();
-      meshRefAN.current!.setMatrixAt(i, dummy.matrix);
-      
-      if (isSelected) meshRefAN.current!.setColorAt(i, COLOR_WHITE);
-      else if (isHovered) meshRefAN.current!.setColorAt(i, COLOR_CYAN);
-      else meshRefAN.current!.setColorAt(i, getAnColor(anName));
-      
-      // --- PL MESH (Bottom Half) ---
-      dummy.position.set(anchor.x, anchor.y, anchor.z);
-      dummy.rotation.set(anchor.pitch, anchor.yaw, 0, 'YXZ');
-      dummy.translateY(-0.15); // Move DOWN
-      dummy.scale.set(s, s, s);
-      dummy.updateMatrix();
-      meshRefPL.current!.setMatrixAt(i, dummy.matrix);
-      
-      if (isSelected) meshRefPL.current!.setColorAt(i, COLOR_WHITE);
-      else if (isHovered) meshRefPL.current!.setColorAt(i, COLOR_CYAN);
-      else meshRefPL.current!.setColorAt(i, getPlColor(plName));
-    });
-    
-    meshRefAN.current.instanceMatrix.needsUpdate = true;
-    if (meshRefAN.current.instanceColor) {
-      meshRefAN.current.instanceColor.needsUpdate = true;
-    }
-    
-    meshRefPL.current.instanceMatrix.needsUpdate = true;
-    if (meshRefPL.current.instanceColor) {
-      meshRefPL.current.instanceColor.needsUpdate = true;
-    }
+      refAN.current!.instanceMatrix.needsUpdate = true;
+      if (refAN.current!.instanceColor) refAN.current!.instanceColor.needsUpdate = true;
+      refPL.current!.instanceMatrix.needsUpdate = true;
+      if (refPL.current!.instanceColor) refPL.current!.instanceColor.needsUpdate = true;
+      refAN.current!.computeBoundingSphere();
+      refPL.current!.computeBoundingSphere();
+    };
 
-    // CRITICAL: Compute bounding spheres so raycasting doesn't fail when the camera zooms in
-    meshRefAN.current.computeBoundingSphere();
-    meshRefPL.current.computeBoundingSphere();
-  }, [visibleAnchors, hoveredIdx, selectedAnchorId]);
+    applyMatrices(regularAnchors, meshRefAN, meshRefPL, false);
+    applyMatrices(middleAnchors, meshRefSphereAN, meshRefSpherePL, true);
+
+  }, [regularAnchors, middleAnchors, hoveredAnchorId, selectedAnchorId]);
 
   // Only run the pulsing animation in useFrame for the selected anchor
   useFrame(() => {
-    if (!meshRefPL.current || !meshRefAN.current || !selectedAnchorId) return;
+    if (!meshRefPL.current || !meshRefAN.current || !meshRefSpherePL.current || !meshRefSphereAN.current || !selectedAnchorId) return;
     
-    // Find index of selected anchor
-    const selectedIdx = visibleAnchors.findIndex(a => a.id === selectedAnchorId);
+    // Check which array it belongs to
+    const isSphere = middleAnchors.some(a => a.id === selectedAnchorId);
+    const anchorsList = isSphere ? middleAnchors : regularAnchors;
+    const refAN = isSphere ? meshRefSphereAN : meshRefAN;
+    const refPL = isSphere ? meshRefSpherePL : meshRefPL;
+    
+    const selectedIdx = anchorsList.findIndex(a => a.id === selectedAnchorId);
     if (selectedIdx === -1) return;
 
-    const anchor = visibleAnchors[selectedIdx];
+    const anchor = anchorsList[selectedIdx];
     
     const time = Date.now() / 1000;
-    const scale = 1.0 + Math.sin(time * 5) * 0.15;
+    const baseScale = isSphere ? 1.7 : 1.15;
+    const scale = baseScale + Math.sin(time * 5) * 0.15;
     
     // Animate AN half (Top)
     dummy.position.set(anchor.x, anchor.y, anchor.z);
     dummy.rotation.set(anchor.pitch, anchor.yaw, 0, 'YXZ');
-    dummy.translateY(0.15);
+    dummy.translateY(isSphere ? 0 : 0.15);
+    if (isSphere) dummy.rotateZ(Math.PI);
     dummy.scale.set(scale, scale, scale);
     dummy.updateMatrix();
-    meshRefAN.current.setMatrixAt(selectedIdx, dummy.matrix);
-    meshRefAN.current.instanceMatrix.needsUpdate = true;
+    refAN.current!.setMatrixAt(selectedIdx, dummy.matrix);
+    refAN.current!.instanceMatrix.needsUpdate = true;
     
     // Animate PL half (Bottom)
     dummy.position.set(anchor.x, anchor.y, anchor.z);
     dummy.rotation.set(anchor.pitch, anchor.yaw, 0, 'YXZ');
-    dummy.translateY(-0.15);
+    dummy.translateY(isSphere ? 0 : -0.15);
     dummy.scale.set(scale, scale, scale);
     dummy.updateMatrix();
-    meshRefPL.current.setMatrixAt(selectedIdx, dummy.matrix);
-    meshRefPL.current.instanceMatrix.needsUpdate = true;
+    refPL.current!.setMatrixAt(selectedIdx, dummy.matrix);
+    refPL.current!.instanceMatrix.needsUpdate = true;
   });
 
-  const handlePointerOver = (e: any) => {
+  const handlePointerOver = (anchorsList: Anchor[]) => (e: any) => {
     e.stopPropagation();
     if (e.instanceId !== undefined) {
-      setHoveredIdx(e.instanceId);
+      setHoveredAnchorId(anchorsList[e.instanceId].id);
     }
   };
 
   const handlePointerOut = () => {
-    setHoveredIdx(null);
+    setHoveredAnchorId(null);
   };
 
-  const hoveredAnchor = hoveredIdx !== null ? visibleAnchors[hoveredIdx] : null;
+  const hoveredAnchor = hoveredAnchorId ? visibleAnchors.find(a => a.id === hoveredAnchorId) : null;
   const hoveredMetaParts = (hoveredAnchor?.metadata || '').split('|');
   const hoveredAnName = hoveredMetaParts[0]?.trim() || 'Unknown';
   const hoveredPlName = hoveredMetaParts[1]?.trim() || 'Unknown';
 
   return (
     <>
+      {/* Regular Cubes */}
       <instancedMesh
         ref={meshRefPL}
-        args={[halfGeometry, plateMaterial, visibleAnchors.length]}
-        onPointerOver={handlePointerOver}
+        args={[halfGeometry, plateMaterial, regularAnchors.length]}
+        onPointerOver={handlePointerOver(regularAnchors)}
         onPointerOut={handlePointerOut}
-        onClick={(e) => {
-          e.stopPropagation();
-          if (e.instanceId !== undefined) {
-            const clickedAnchor = visibleAnchors[e.instanceId];
-            onSelectAnchor(selectedAnchorId === clickedAnchor.id ? null : clickedAnchor);
-          }
-        }}
+        onClick={(e) => { e.stopPropagation(); if (e.instanceId !== undefined) onSelectAnchor(selectedAnchorId === regularAnchors[e.instanceId].id ? null : regularAnchors[e.instanceId]); }}
       />
       <instancedMesh
         ref={meshRefAN}
-        args={[halfGeometry, plateMaterial, visibleAnchors.length]}
-        onPointerOver={handlePointerOver}
+        args={[halfGeometry, plateMaterial, regularAnchors.length]}
+        onPointerOver={handlePointerOver(regularAnchors)}
         onPointerOut={handlePointerOut}
-        onClick={(e) => {
-          e.stopPropagation();
-          if (e.instanceId !== undefined) {
-            const clickedAnchor = visibleAnchors[e.instanceId];
-            onSelectAnchor(selectedAnchorId === clickedAnchor.id ? null : clickedAnchor);
-          }
-        }}
+        onClick={(e) => { e.stopPropagation(); if (e.instanceId !== undefined) onSelectAnchor(selectedAnchorId === regularAnchors[e.instanceId].id ? null : regularAnchors[e.instanceId]); }}
       />
+      
+      {/* Middle Spheres */}
+      <instancedMesh
+        ref={meshRefSpherePL}
+        args={[halfSphereGeometry, plateMaterial, middleAnchors.length]}
+        onPointerOver={handlePointerOver(middleAnchors)}
+        onPointerOut={handlePointerOut}
+        onClick={(e) => { e.stopPropagation(); if (e.instanceId !== undefined) onSelectAnchor(selectedAnchorId === middleAnchors[e.instanceId].id ? null : middleAnchors[e.instanceId]); }}
+      />
+      <instancedMesh
+        ref={meshRefSphereAN}
+        args={[halfSphereGeometry, plateMaterial, middleAnchors.length]}
+        onPointerOver={handlePointerOver(middleAnchors)}
+        onPointerOut={handlePointerOut}
+        onClick={(e) => { e.stopPropagation(); if (e.instanceId !== undefined) onSelectAnchor(selectedAnchorId === middleAnchors[e.instanceId].id ? null : middleAnchors[e.instanceId]); }}
+      />
+      
+      {/* 3D Verification Lines to Pillars for hovered/selected Middle Anchors */}
+      {middleAnchors.map(a => {
+        if (!a.pillarAPoint || !a.pillarBPoint) return null;
+        if (a.id !== selectedAnchorId && a.id !== hoveredAnchorId) return null;
+        return (
+          <group key={`lines-${a.id}`}>
+            <Line points={[[a.x, a.y, a.z], a.pillarAPoint]} color="#ea580c" lineWidth={2} dashed={true} dashSize={0.5} gapSize={0.2} opacity={0.6} transparent />
+            <Line points={[[a.x, a.y, a.z], a.pillarBPoint]} color="#ea580c" lineWidth={2} dashed={true} dashSize={0.5} gapSize={0.2} opacity={0.6} transparent />
+          </group>
+        )
+      })}
       
       {/* Tooltip anchored to the 3D position */}
       {hoveredAnchor && (

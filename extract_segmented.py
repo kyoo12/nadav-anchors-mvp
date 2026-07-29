@@ -78,6 +78,27 @@ def main():
     if len(ff_pts) > 0:
         ff_tree = KDTree(ff_pts)
 
+    col_idx = -1
+    for layer in model.Layers:
+        if layer.Name == 'vertical colums':
+            col_idx = layer.Index
+            break
+            
+    print("Building Pillar KDTrees...")
+    pillars_data = []
+    for obj in model.Objects:
+        if obj.Attributes.LayerIndex == col_idx and obj.Geometry.ObjectType == rhino3dm.ObjectType.Mesh:
+            pts_2d = []
+            pts_3d = []
+            for v in obj.Geometry.Vertices:
+                pts_2d.append((v.X, v.Y))
+                pts_3d.append((v.X, v.Y, v.Z))
+            if pts_2d:
+                pillars_data.append({
+                    'tree': KDTree(pts_2d),
+                    'pts_3d': pts_3d
+                })
+
     raw_blocks = []
     
     print("Extracting Anchors...")
@@ -349,6 +370,25 @@ def main():
             is_roof = (f_idx == len(floors) - 1)
             floor_prefix = "Roof" if is_roof else f"F{f_idx}"
             
+            middle_indices = [4, 13, 22, 31, 40, 58, 73, 70, 61, 41]
+            is_middle = (i in middle_indices)
+            
+            pillar_a_dist, pillar_b_dist = None, None
+            pillar_a_pt, pillar_b_pt = None, None
+            
+            if is_middle and len(pillars_data) >= 2:
+                anchor_2d = [a['rhino_x'], a['rhino_y']]
+                p_dists = []
+                for p_data in pillars_data:
+                    d, idx = p_data['tree'].query(anchor_2d)
+                    closest_3d = p_data['pts_3d'][idx]
+                    p_dists.append((d, closest_3d))
+                p_dists.sort(key=lambda x: x[0])
+                pillar_a_dist = float(p_dists[0][0])
+                pillar_b_dist = float(p_dists[1][0])
+                pillar_a_pt = [p_dists[0][1][0] / 1000.0, p_dists[0][1][2] / 1000.0, -p_dists[0][1][1] / 1000.0]
+                pillar_b_pt = [p_dists[1][1][0] / 1000.0, p_dists[1][1][2] / 1000.0, -p_dists[1][1][1] / 1000.0]
+
             export_anchors.append({
                 'id': f"{floor_prefix}_{i}",
                 'floor': f_idx,
@@ -363,7 +403,12 @@ def main():
                 'offsetX': float(a.get('offsetX', 0.0)),
                 'nearestGridY': a.get('nearestGridY', 'N/A'),
                 'offsetY': float(a.get('offsetY', 0.0)),
-                'distanceToFloatingFloor': float(a.get('distanceToFloatingFloor', 0.0))
+                'distanceToFloatingFloor': float(a.get('distanceToFloatingFloor', 0.0)),
+                'isMiddleAnchor': is_middle,
+                'pillarADistance': pillar_a_dist,
+                'pillarBDistance': pillar_b_dist,
+                'pillarAPoint': pillar_a_pt,
+                'pillarBPoint': pillar_b_pt
             })
             
     with open('web/public/true_anchors.json', 'w', encoding='utf-8') as f:
