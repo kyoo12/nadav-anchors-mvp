@@ -376,7 +376,7 @@
     "offsetY": 0.0,
     "distanceToFloatingFloor": -660.0538400737587,
     "isMiddleAnchor": true,
-    "pillarADistance": 5791.011065062987,
+    "pillarADistance": 5256.488406394643,
     "pillarBDistance": 5089.527740109631,
     "pillarAPath": [
       [
@@ -405,9 +405,9 @@
         89.84586139299743
       ],
       [
-        -38.86144140625,
+        -38.42346484375,
         4.539946159926242,
-        89.2900234375
+        89.59778125
       ]
     ],
     "pillarBPath": [
@@ -645,7 +645,7 @@
     "offsetY": 0.0,
     "distanceToFloatingFloor": -660.0538400636015,
     "isMiddleAnchor": true,
-    "pillarADistance": 5718.4365164339115,
+    "pillarADistance": 5232.71353983141,
     "pillarBDistance": 5058.350648328897,
     "pillarAPath": [
       [
@@ -674,9 +674,9 @@
         95.65949549617481
       ],
       [
-        -29.76278125,
+        -29.33366015625,
         4.539946159936399,
-        95.2398203125
+        95.468296875
       ]
     ],
     "pillarBPath": [
@@ -914,7 +914,7 @@
     "offsetY": 0.0,
     "distanceToFloatingFloor": -660.0538400553942,
     "isMiddleAnchor": true,
-    "pillarADistance": 5731.58354654079,
+    "pillarADistance": 5264.032566944128,
     "pillarBDistance": 5083.660295979244,
     "pillarAPath": [
       [
@@ -943,9 +943,9 @@
         100.20110871222836
       ],
       [
-        -20.04399609375,
+        -19.608984375,
         4.539946159944606,
-        99.8734609375
+        100.0451015625
       ]
     ],
     "pillarBPath": [
@@ -1183,7 +1183,7 @@
     "offsetY": 0.0,
     "distanceToFloatingFloor": -660.0538400492824,
     "isMiddleAnchor": true,
-    "pillarADistance": 5643.997264285595,
+    "pillarADistance": 5175.950228567676,
     "pillarBDistance": 5200.301221645866,
     "pillarAPath": [
       [
@@ -1212,9 +1212,9 @@
         103.3861501622101
       ],
       [
-        -9.7645703125,
+        -9.3078583984375,
         4.539946159950718,
-        103.207359375
+        103.3101015625
       ]
     ],
     "pillarBPath": [
@@ -1452,7 +1452,7 @@
     "offsetY": 0.0,
     "distanceToFloatingFloor": -660.0538400470195,
     "isMiddleAnchor": true,
-    "pillarADistance": 5694.460802022965,
+    "pillarADistance": 5247.919894331342,
     "pillarBDistance": 5083.391836020949,
     "pillarAPath": [
       [
@@ -1481,9 +1481,9 @@
         101.96900909071543
       ],
       [
-        33.04206640625,
+        33.460859375,
         4.53994615995298,
-        102.2166171875
+        102.0566171875
       ]
     ],
     "pillarBPath": [
@@ -1721,7 +1721,7 @@
     "offsetY": 0.0,
     "distanceToFloatingFloor": -660.0538400452515,
     "isMiddleAnchor": true,
-    "pillarADistance": 5779.550112946805,
+    "pillarADistance": 5307.26879825542,
     "pillarBDistance": 5090.505417155681,
     "pillarAPath": [
       [
@@ -1750,9 +1750,9 @@
         105.21538684493298
       ],
       [
-        0.9004901733398437,
+        1.3793184814453125,
         4.539946159954749,
-        105.130625
+        105.120046875
       ]
     ],
     "pillarBPath": [
@@ -2091,7 +2091,7 @@
     "offsetY": 0.0,
     "distanceToFloatingFloor": -660.0538400436799,
     "isMiddleAnchor": true,
-    "pillarADistance": 1913.4544470009873,
+    "pillarADistance": 1505.6873525450876,
     "pillarBDistance": 1464.0028656698858,
     "pillarAPath": [
       [
@@ -2105,9 +2105,9 @@
         104.49471830903413
       ],
       [
-        22.519787109375,
+        22.91580078125,
         4.53994615995632,
-        104.6261328125
+        104.5011328125
       ]
     ],
     "pillarBPath": [
@@ -2192,7 +2192,7 @@
     "offsetY": 0.0,
     "distanceToFloatingFloor": -660.0538400435635,
     "isMiddleAnchor": true,
-    "pillarADistance": 5664.385287877531,
+    "pillarADistance": 5213.899605453713,
     "pillarBDistance": 5152.894688187479,
     "pillarAPath": [
       [
@@ -2221,9 +2221,9 @@
         105.56884984248842
       ],
       [
-        11.7532509765625,
+        12.2034873046875,
         4.539946159956436,
-        105.59459375
+        105.57959375
       ]
     ],
     "pillarBPath": [
@@ -2730,7 +2730,7 @@
     "offsetY": 0.0,
     "distanceToFloatingFloor": 714.0000000941,
     "isMiddleAnchor": true,
-    "pillarADistance": 5804.319760779227,
+    "pillarADistance": 5302.30061210354,
     "pillarBDistance": 5126.712247976782,
     "pillarAPath": [
       [
@@ -2759,9 +2759,9 @@
         90.18959109634719
       ],
       [
-        -39.10284765625,
+        -38.69296484375,
         5.9640000000941,
-        89.638171875
+        89.92915625
       ]
     ],
     "pillarBPath": [
@@ -2999,7 +2999,7 @@
     "offsetY": 0.0,
     "distanceToFloatingFloor": 714.0000001042354,
     "isMiddleAnchor": true,
-    "pillarADistance": 5741.420422425864,
+    "pillarADistance": 5271.60265992209,
     "pillarBDistance": 5075.7321316095195,
     "pillarAPath": [
       [
@@ -3028,9 +3028,9 @@
         96.0342232269033
       ],
       [
-        -29.937845703125,
+        -29.55530859375,
         5.964000000104235,
-        95.5711484375
+        95.84559375
       ]
     ],
     "pillarBPath": [
@@ -3268,7 +3268,7 @@
     "offsetY": 0.0,
     "distanceToFloatingFloor": 714.0000001124863,
     "isMiddleAnchor": true,
-    "pillarADistance": 5772.420604019322,
+    "pillarADistance": 5314.290018312717,
     "pillarBDistance": 5118.9902030497005,
     "pillarAPath": [
       [
@@ -3297,9 +3297,9 @@
         100.5990039172958
       ],
       [
-        -20.22096484375,
+        -19.779830078125,
         5.964000000112486,
-        100.2912890625
+        100.423015625
       ]
     ],
     "pillarBPath": [
@@ -3537,7 +3537,7 @@
     "offsetY": 0.0,
     "distanceToFloatingFloor": 714.0000001186345,
     "isMiddleAnchor": true,
-    "pillarADistance": 5666.369982326133,
+    "pillarADistance": 5211.019954641221,
     "pillarBDistance": 5210.645517448894,
     "pillarAPath": [
       [
@@ -3566,9 +3566,9 @@
         103.80166530758177
       ],
       [
-        -9.8570751953125,
+        -9.41450390625,
         5.964000000118634,
-        103.6101015625
+        103.7176015625
       ]
     ],
     "pillarBPath": [
@@ -3806,7 +3806,7 @@
     "offsetY": 0.0,
     "distanceToFloatingFloor": 714.0000001210428,
     "isMiddleAnchor": true,
-    "pillarADistance": 5736.668955495187,
+    "pillarADistance": 5313.633548134031,
     "pillarBDistance": 5119.615392788449,
     "pillarAPath": [
       [
@@ -3835,9 +3835,9 @@
         102.4141196198165
       ],
       [
-        33.15305078125,
+        33.56287109375,
         5.964000000121043,
-        102.6166171875
+        102.5116171875
       ]
     ],
     "pillarBPath": [
@@ -4075,7 +4075,7 @@
     "offsetY": 0.0,
     "distanceToFloatingFloor": 714.0000001227527,
     "isMiddleAnchor": true,
-    "pillarADistance": 5827.428041863575,
+    "pillarADistance": 5353.490321376217,
     "pillarBDistance": 5102.532096406656,
     "pillarAPath": [
       [
@@ -4104,9 +4104,9 @@
         105.63885387200838
       ],
       [
-        0.8363365478515625,
+        1.30999462890625,
         5.964000000122753,
-        105.5488828125
+        105.5778828125
       ]
     ],
     "pillarBPath": [
@@ -4445,7 +4445,7 @@
     "offsetY": 0.0,
     "distanceToFloatingFloor": 714.0000001243316,
     "isMiddleAnchor": true,
-    "pillarADistance": 1944.5822523760555,
+    "pillarADistance": 1518.5424473687456,
     "pillarBDistance": 1491.0089856184443,
     "pillarAPath": [
       [
@@ -4459,9 +4459,9 @@
         104.91326716101871
       ],
       [
-        22.564267578125,
+        22.9836875,
         5.964000000124331,
-        105.0411328125
+        104.9661328125
       ]
     ],
     "pillarBPath": [
@@ -4546,7 +4546,7 @@
     "offsetY": 0.0,
     "distanceToFloatingFloor": 714.0000001244553,
     "isMiddleAnchor": true,
-    "pillarADistance": 5709.065246893936,
+    "pillarADistance": 5247.57200004899,
     "pillarBDistance": 5158.481429443157,
     "pillarAPath": [
       [
@@ -4575,9 +4575,9 @@
         105.99486963347972
       ],
       [
-        11.7485419921875,
+        12.20969140625,
         5.9640000001244555,
-        106.01959375
+        105.99959375
       ]
     ],
     "pillarBPath": [
@@ -5084,7 +5084,7 @@
     "offsetY": 0.0,
     "distanceToFloatingFloor": 664.000000094722,
     "isMiddleAnchor": true,
-    "pillarADistance": 5828.113991880536,
+    "pillarADistance": 5359.563995407551,
     "pillarBDistance": 5161.399495899426,
     "pillarAPath": [
       [
@@ -5113,9 +5113,9 @@
         90.60270927427315
       ],
       [
-        -39.41937890625,
+        -39.0162890625,
         9.764000000094722,
-        90.082828125
+        90.3266015625
       ]
     ],
     "pillarBPath": [
@@ -5353,7 +5353,7 @@
     "offsetY": 0.0,
     "distanceToFloatingFloor": 664.0000001049884,
     "isMiddleAnchor": true,
-    "pillarADistance": 5772.379998359882,
+    "pillarADistance": 5312.48037772918,
     "pillarBDistance": 5100.444556820345,
     "pillarAPath": [
       [
@@ -5382,9 +5382,9 @@
         96.48399002748683
       ],
       [
-        -30.21859375,
+        -29.812859375,
         9.76400000010499,
-        96.0764921875
+        96.293171875
       ]
     ],
     "pillarBPath": [
@@ -5622,7 +5622,7 @@
     "offsetY": 0.0,
     "distanceToFloatingFloor": 664.0000001132994,
     "isMiddleAnchor": true,
-    "pillarADistance": 5817.79269326392,
+    "pillarADistance": 5373.013007813534,
     "pillarBDistance": 5151.013497705042,
     "pillarAPath": [
       [
@@ -5651,9 +5651,9 @@
         101.07916991217478
       ],
       [
-        -20.425658203125,
+        -19.988345703125,
         9.764000000113299,
-        100.781546875
+        100.8864609375
       ]
     ],
     "pillarBPath": [
@@ -5891,7 +5891,7 @@
     "offsetY": 0.0,
     "distanceToFloatingFloor": 664.0000001194821,
     "isMiddleAnchor": true,
-    "pillarADistance": 5703.471345444379,
+    "pillarADistance": 5250.401940269643,
     "pillarBDistance": 5230.550812947822,
     "pillarAPath": [
       [
@@ -5920,9 +5920,9 @@
         104.30130729221439
       ],
       [
-        -9.99178125,
+        -9.544208984375,
         9.764000000119482,
-        104.143421875
+        104.218640625
       ]
     ],
     "pillarBPath": [
@@ -6160,7 +6160,7 @@
     "offsetY": 0.0,
     "distanceToFloatingFloor": 664.0000001217722,
     "isMiddleAnchor": true,
-    "pillarADistance": 5802.9951830731425,
+    "pillarADistance": 5371.937241952792,
     "pillarBDistance": 5154.43437114933,
     "pillarAPath": [
       [
@@ -6189,9 +6189,9 @@
         102.86744068406126
       ],
       [
-        33.271125,
+        33.67265234375,
         9.764000000121772,
-        103.1279765625
+        102.9616171875
       ]
     ],
     "pillarBPath": [
@@ -6429,7 +6429,7 @@
     "offsetY": 0.0,
     "distanceToFloatingFloor": 664.000000123564,
     "isMiddleAnchor": true,
-    "pillarADistance": 5876.92700632017,
+    "pillarADistance": 5411.5191290508865,
     "pillarBDistance": 5149.99630432402,
     "pillarAPath": [
       [
@@ -6458,9 +6458,9 @@
         106.15024454239528
       ],
       [
-        0.7684118041992187,
+        1.2364520263671874,
         9.764000000123565,
-        106.0438828125
+        106.0592578125
       ]
     ],
     "pillarBPath": [
@@ -6799,7 +6799,7 @@
     "offsetY": 0.0,
     "distanceToFloatingFloor": 664.0000001251392,
     "isMiddleAnchor": true,
-    "pillarADistance": 1981.0203995791592,
+    "pillarADistance": 1534.0673114989627,
     "pillarBDistance": 1533.3940537200278,
     "pillarAPath": [
       [
@@ -6813,9 +6813,9 @@
         105.42081270095639
       ],
       [
-        22.623373046875,
+        23.05867578125,
         9.764000000125138,
-        105.5661328125
+        105.4561328125
       ]
     ],
     "pillarBPath": [
@@ -6900,7 +6900,7 @@
     "offsetY": 0.0,
     "distanceToFloatingFloor": 664.0000001252702,
     "isMiddleAnchor": true,
-    "pillarADistance": 5729.938004311275,
+    "pillarADistance": 5293.648468607359,
     "pillarBDistance": 5167.90742884917,
     "pillarAPath": [
       [
@@ -6929,9 +6929,9 @@
         106.50815274270703
       ],
       [
-        11.77577734375,
+        12.2125361328125,
         9.76400000012527,
-        106.52959375
+        106.48459375
       ]
     ],
     "pillarBPath": [
@@ -7438,7 +7438,7 @@
     "offsetY": 0.0,
     "distanceToFloatingFloor": 689.0000000949512,
     "isMiddleAnchor": true,
-    "pillarADistance": 5836.708392532174,
+    "pillarADistance": 5378.001037719432,
     "pillarBDistance": 5172.621813707867,
     "pillarAPath": [
       [
@@ -7467,9 +7467,9 @@
         90.75419766366126
       ],
       [
-        -39.51663671875,
+        -39.12107421875,
         13.639000000094951,
-        90.2153671875
+        90.4560234375
       ]
     ],
     "pillarBPath": [
@@ -7707,7 +7707,7 @@
     "offsetY": 0.0,
     "distanceToFloatingFloor": 689.0000001052431,
     "isMiddleAnchor": true,
-    "pillarADistance": 5786.835629724644,
+    "pillarADistance": 5327.787150059451,
     "pillarBDistance": 5107.950273311836,
     "pillarAPath": [
       [
@@ -7736,9 +7736,9 @@
         96.64913250082022
       ],
       [
-        -30.3041640625,
+        -29.90587890625,
         13.639000000105243,
-        96.2263671875
+        96.454609375
       ]
     ],
     "pillarBPath": [
@@ -7976,7 +7976,7 @@
     "offsetY": 0.0,
     "distanceToFloatingFloor": 689.000000113565,
     "isMiddleAnchor": true,
-    "pillarADistance": 5832.9361594434395,
+    "pillarADistance": 5395.367272195599,
     "pillarBDistance": 5161.993580730879,
     "pillarAPath": [
       [
@@ -8005,9 +8005,9 @@
         101.2537518042826
       ],
       [
-        -20.491541015625,
+        -20.059,
         13.639000000113565,
-        100.940828125
+        101.0428671875
       ]
     ],
     "pillarBPath": [
@@ -8245,7 +8245,7 @@
     "offsetY": 0.0,
     "distanceToFloatingFloor": 689.0000001197695,
     "isMiddleAnchor": true,
-    "pillarADistance": 5715.407581565366,
+    "pillarADistance": 5265.364141220589,
     "pillarBDistance": 5249.851378584634,
     "pillarAPath": [
       [
@@ -8274,9 +8274,9 @@
         104.48394163449734
       ],
       [
-        -10.031056640625,
+        -9.59117578125,
         13.63900000011977,
-        104.30415625
+        104.4001015625
       ]
     ],
     "pillarBPath": [
@@ -8514,7 +8514,7 @@
     "offsetY": 0.0,
     "distanceToFloatingFloor": 689.0000001220633,
     "isMiddleAnchor": true,
-    "pillarADistance": 5818.881480753851,
+    "pillarADistance": 5389.3452156163385,
     "pillarBDistance": 5168.5253742414825,
     "pillarAPath": [
       [
@@ -8543,9 +8543,9 @@
         103.04608876771195
       ],
       [
-        33.321890625,
+        33.7277265625,
         13.639000000122063,
-        103.306765625
+        103.1642578125
       ]
     ],
     "pillarBPath": [
@@ -8783,7 +8783,7 @@
     "offsetY": 0.0,
     "distanceToFloatingFloor": 689.000000123855,
     "isMiddleAnchor": true,
-    "pillarADistance": 5883.02334820272,
+    "pillarADistance": 5433.5549172855035,
     "pillarBDistance": 5164.224787483015,
     "pillarAPath": [
       [
@@ -8812,9 +8812,9 @@
         106.33712458121052
       ],
       [
-        0.755777587890625,
+        1.1999967041015625,
         13.639000000123856,
-        106.2238828125
+        106.2978828125
       ]
     ],
     "pillarBPath": [
@@ -9153,7 +9153,7 @@
     "offsetY": 0.0,
     "distanceToFloatingFloor": 689.0000001254448,
     "isMiddleAnchor": true,
-    "pillarADistance": 1995.2490482941048,
+    "pillarADistance": 1549.1055921865313,
     "pillarBDistance": 1563.445609037105,
     "pillarAPath": [
       [
@@ -9167,9 +9167,9 @@
         105.60620607110148
       ],
       [
-        22.642375,
+        23.077482421875,
         13.639000000125446,
-        105.7461328125
+        105.6361328125
       ]
     ],
     "pillarBPath": [
@@ -9254,7 +9254,7 @@
     "offsetY": 0.0,
     "distanceToFloatingFloor": 689.0000001255721,
     "isMiddleAnchor": true,
-    "pillarADistance": 5740.736692905624,
+    "pillarADistance": 5311.461104168505,
     "pillarBDistance": 5169.975064015188,
     "pillarAPath": [
       [
@@ -9283,9 +9283,9 @@
         106.69610374669318
       ],
       [
-        11.7825302734375,
+        12.2126787109375,
         13.639000000125572,
-        106.71459375
+        106.72459375
       ]
     ],
     "pillarBPath": [
@@ -9792,7 +9792,7 @@
     "offsetY": 0.0,
     "distanceToFloatingFloor": 762.0000000946748,
     "isMiddleAnchor": true,
-    "pillarADistance": 5823.90085322704,
+    "pillarADistance": 5353.374225339277,
     "pillarBDistance": 5160.780898504318,
     "pillarAPath": [
       [
@@ -9821,9 +9821,9 @@
         90.57202079479711
       ],
       [
-        -39.38973828125,
+        -38.9930234375,
         17.562000000094674,
-        90.0424296875
+        90.2983046875
       ]
     ],
     "pillarBPath": [
@@ -10061,7 +10061,7 @@
     "offsetY": 0.0,
     "distanceToFloatingFloor": 762.0000001049375,
     "isMiddleAnchor": true,
-    "pillarADistance": 5769.4495182803075,
+    "pillarADistance": 5309.460030954827,
     "pillarBDistance": 5097.75914880159,
     "pillarAPath": [
       [
@@ -10090,9 +10090,9 @@
         96.4511771581024
       ],
       [
-        -30.1969921875,
+        -29.7932578125,
         17.562000000104938,
-        96.03865625
+        96.2591796875
       ]
     ],
     "pillarBPath": [
@@ -10330,7 +10330,7 @@
     "offsetY": 0.0,
     "distanceToFloatingFloor": 762.0000001131848,
     "isMiddleAnchor": true,
-    "pillarADistance": 5810.69322412741,
+    "pillarADistance": 5363.693005375515,
     "pillarBDistance": 5146.461398033685,
     "pillarAPath": [
       [
@@ -10359,9 +10359,9 @@
         101.00634548106225
       ],
       [
-        -20.391943359375,
+        -19.959732421875,
         17.562000000113184,
-        100.70003125
+        100.823328125
       ]
     ],
     "pillarBPath": [
@@ -10599,7 +10599,7 @@
     "offsetY": 0.0,
     "distanceToFloatingFloor": 762.0000001193657,
     "isMiddleAnchor": true,
-    "pillarADistance": 5698.283884968401,
+    "pillarADistance": 5244.508690635239,
     "pillarBDistance": 5220.071933365483,
     "pillarAPath": [
       [
@@ -10628,9 +10628,9 @@
         104.22501164110486
       ],
       [
-        -9.964001953125,
+        -9.5251357421875,
         17.562000000119365,
-        104.0297265625
+        104.145109375
       ]
     ],
     "pillarBPath": [
@@ -10868,7 +10868,7 @@
     "offsetY": 0.0,
     "distanceToFloatingFloor": 762.0000001217122,
     "isMiddleAnchor": true,
-    "pillarADistance": 5799.496268565265,
+    "pillarADistance": 5367.76879130176,
     "pillarBDistance": 5150.148723744853,
     "pillarAPath": [
       [
@@ -10897,9 +10897,9 @@
         102.83112742415224
       ],
       [
-        33.25333984375,
+        33.66978515625,
         17.562000000121714,
-        103.0654921875
+        102.9516171875
       ]
     ],
     "pillarBPath": [
@@ -11137,7 +11137,7 @@
     "offsetY": 0.0,
     "distanceToFloatingFloor": 762.0000001235021,
     "isMiddleAnchor": true,
-    "pillarADistance": 5878.639144437328,
+    "pillarADistance": 5405.09091840446,
     "pillarBDistance": 5146.284519771589,
     "pillarAPath": [
       [
@@ -11166,9 +11166,9 @@
         106.07236481737701
       ],
       [
-        0.7708027954101563,
+        1.249009765625,
         17.5620000001235,
-        105.976140625
+        105.9770703125
       ]
     ],
     "pillarBPath": [
@@ -11507,7 +11507,7 @@
     "offsetY": 0.0,
     "distanceToFloatingFloor": 762.0000001250846,
     "isMiddleAnchor": true,
-    "pillarADistance": 1978.1981484996757,
+    "pillarADistance": 1531.0116261331334,
     "pillarBDistance": 1527.0778544559787,
     "pillarAPath": [
       [
@@ -11521,9 +11521,9 @@
         105.38319208015531
       ],
       [
-        22.6189375,
+        23.057189453125,
         17.562000000125085,
-        105.5261328125
+        105.4361328125
       ]
     ],
     "pillarBPath": [
@@ -11608,7 +11608,7 @@
     "offsetY": 0.0,
     "distanceToFloatingFloor": 762.0000001251465,
     "isMiddleAnchor": true,
-    "pillarADistance": 5731.385826931994,
+    "pillarADistance": 5290.003589584263,
     "pillarBDistance": 5166.943505470629,
     "pillarAPath": [
       [
@@ -11637,7 +11637,7 @@
         106.47019413717193
       ],
       [
-        11.7709990234375,
+        12.2125361328125,
         17.562000000125146,
         106.48459375
       ]
@@ -12146,7 +12146,7 @@
     "offsetY": 0.0,
     "distanceToFloatingFloor": 860.0000000939326,
     "isMiddleAnchor": true,
-    "pillarADistance": 5802.907122955161,
+    "pillarADistance": 5287.807338711151,
     "pillarBDistance": 5115.2263010265015,
     "pillarAPath": [
       [
@@ -12175,9 +12175,9 @@
         90.0779600996226
       ],
       [
-        -39.0008359375,
+        -38.62098046875,
         21.51000000009393,
-        89.4908203125
+        89.8408359375
       ]
     ],
     "pillarBPath": [
@@ -12415,7 +12415,7 @@
     "offsetY": 0.0,
     "distanceToFloatingFloor": 860.0000001040644,
     "isMiddleAnchor": true,
-    "pillarADistance": 5731.897228357942,
+    "pillarADistance": 5260.271386286585,
     "pillarBDistance": 5069.314112365847,
     "pillarAPath": [
       [
@@ -12444,9 +12444,9 @@
         95.91253423344318
       ],
       [
-        -29.896703125,
+        -29.485837890625,
         21.510000000104064,
-        95.4930859375
+        95.7246875
       ]
     ],
     "pillarBPath": [
@@ -12684,7 +12684,7 @@
     "offsetY": 0.0,
     "distanceToFloatingFloor": 860.0000001123553,
     "isMiddleAnchor": true,
-    "pillarADistance": 5757.847160905119,
+    "pillarADistance": 5296.961101935205,
     "pillarBDistance": 5106.815148516152,
     "pillarAPath": [
       [
@@ -12713,9 +12713,9 @@
         100.47055130952099
       ],
       [
-        -20.162974609375,
+        -19.726462890625,
         21.510000000112356,
-        100.1568984375
+        100.3068984375
       ]
     ],
     "pillarBPath": [
@@ -12953,7 +12953,7 @@
     "offsetY": 0.0,
     "distanceToFloatingFloor": 860.000000118438,
     "isMiddleAnchor": true,
-    "pillarADistance": 5657.123686248774,
+    "pillarADistance": 5196.546519473904,
     "pillarBDistance": 5205.930689071834,
     "pillarAPath": [
       [
@@ -12982,9 +12982,9 @@
         103.62800652547362
       ],
       [
-        -9.8257734375,
+        -9.3711123046875,
         21.51000000011844,
-        103.47259375
+        103.5501015625
       ]
     ],
     "pillarBPath": [
@@ -13222,7 +13222,7 @@
     "offsetY": 0.0,
     "distanceToFloatingFloor": 860.00000012077,
     "isMiddleAnchor": true,
-    "pillarADistance": 5720.499395837936,
+    "pillarADistance": 5289.632178552715,
     "pillarBDistance": 5104.166414923318,
     "pillarAPath": [
       [
@@ -13251,9 +13251,9 @@
         102.24471683552119
       ],
       [
-        33.1170234375,
+        33.52539453125,
         21.51000000012077,
-        102.486734375
+        102.3477578125
       ]
     ],
     "pillarBPath": [
@@ -13491,7 +13491,7 @@
     "offsetY": 0.0,
     "distanceToFloatingFloor": 860.0000001224798,
     "isMiddleAnchor": true,
-    "pillarADistance": 5807.988077429164,
+    "pillarADistance": 5334.7433323156265,
     "pillarBDistance": 5098.295133108072,
     "pillarAPath": [
       [
@@ -13520,9 +13520,9 @@
         105.46188566585664
       ],
       [
-        0.8618175048828125,
+        1.33682763671875,
         21.51000000012248,
-        105.3827578125
+        105.3938828125
       ]
     ],
     "pillarBPath": [
@@ -13861,7 +13861,7 @@
     "offsetY": 0.0,
     "distanceToFloatingFloor": 860.0000001241169,
     "isMiddleAnchor": true,
-    "pillarADistance": 1935.2793648971644,
+    "pillarADistance": 1515.011837986194,
     "pillarBDistance": 1482.3614198526127,
     "pillarAPath": [
       [
@@ -13875,9 +13875,9 @@
         104.77785788059602
       ],
       [
-        22.543779296875,
+        22.962533203125,
         21.510000000124116,
-        104.8711328125
+        104.8311328125
       ]
     ],
     "pillarBPath": [
@@ -13962,7 +13962,7 @@
     "offsetY": 0.0,
     "distanceToFloatingFloor": 860.0000001241751,
     "isMiddleAnchor": true,
-    "pillarADistance": 5689.591552230307,
+    "pillarADistance": 5234.498012062631,
     "pillarBDistance": 5155.691652140105,
     "pillarAPath": [
       [
@@ -13991,9 +13991,9 @@
         105.81687438302627
       ],
       [
-        11.751142578125,
+        12.2060517578125,
         21.510000000124176,
-        105.83459375
+        105.81959375
       ]
     ],
     "pillarBPath": [
@@ -14500,7 +14500,7 @@
     "offsetY": 0.0,
     "distanceToFloatingFloor": 667.0000000927066,
     "isMiddleAnchor": true,
-    "pillarADistance": 5736.4105482734385,
+    "pillarADistance": 5173.861293477166,
     "pillarBDistance": 5031.96031542415,
     "pillarAPath": [
       [
@@ -14529,9 +14529,9 @@
         89.22724479003114
       ],
       [
-        -38.40717578125,
+        -37.93876953125,
         25.167000000092706,
-        88.6898984375
+        89.003546875
       ]
     ],
     "pillarBPath": [
@@ -14769,7 +14769,7 @@
     "offsetY": 0.0,
     "distanceToFloatingFloor": 667.0000001027001,
     "isMiddleAnchor": true,
-    "pillarADistance": 5679.798672687506,
+    "pillarADistance": 5153.683176975546,
     "pillarBDistance": 4995.318900585459,
     "pillarAPath": [
       [
@@ -14798,9 +14798,9 @@
         95.02946322103922
       ],
       [
-        -29.425677734375,
+        -28.956142578125,
         25.1670000001027,
-        94.6149453125
+        94.854203125
       ]
     ],
     "pillarBPath": [
@@ -15038,7 +15038,7 @@
     "offsetY": 0.0,
     "distanceToFloatingFloor": 667.0000001109147,
     "isMiddleAnchor": true,
-    "pillarADistance": 5695.151687525822,
+    "pillarADistance": 5192.725156769401,
     "pillarBDistance": 5029.59502803417,
     "pillarAPath": [
       [
@@ -15067,9 +15067,9 @@
         99.4842644652608
       ],
       [
-        -19.778349609375,
+        -19.306572265625,
         25.167000000110914,
-        99.1668984375
+        99.340484375
       ]
     ],
     "pillarBPath": [
@@ -15307,7 +15307,7 @@
     "offsetY": 0.0,
     "distanceToFloatingFloor": 667.0000001168992,
     "isMiddleAnchor": true,
-    "pillarADistance": 5601.694626685794,
+    "pillarADistance": 5116.743105022877,
     "pillarBDistance": 5182.682755595694,
     "pillarAPath": [
       [
@@ -15336,9 +15336,9 @@
         102.68760418938115
       ],
       [
-        -9.59686328125,
+        -9.1254345703125,
         25.1670000001169,
-        102.5001015625
+        102.613953125
       ]
     ],
     "pillarBPath": [
@@ -15576,7 +15576,7 @@
     "offsetY": 0.0,
     "distanceToFloatingFloor": 667.0000001192166,
     "isMiddleAnchor": true,
-    "pillarADistance": 5637.376165672997,
+    "pillarADistance": 5159.455942504054,
     "pillarBDistance": 5027.425907651001,
     "pillarAPath": [
       [
@@ -15605,9 +15605,9 @@
         101.32081700968571
       ],
       [
-        32.85412109375,
+        33.307609375,
         25.167000000119216,
-        101.5566171875
+        101.404296875
       ]
     ],
     "pillarBPath": [
@@ -15845,7 +15845,7 @@
     "offsetY": 0.0,
     "distanceToFloatingFloor": 667.0000001208864,
     "isMiddleAnchor": true,
-    "pillarADistance": 5695.9848684933495,
+    "pillarADistance": 5224.067515611784,
     "pillarBDistance": 5055.212223966394,
     "pillarAPath": [
       [
@@ -15874,9 +15874,9 @@
         104.44987041909536
       ],
       [
-        1.015879638671875,
+        1.491225830078125,
         25.167000000120886,
-        104.3783203125
+        104.3788828125
       ]
     ],
     "pillarBPath": [
@@ -16316,8 +16316,8 @@
     "offsetY": 0.0,
     "distanceToFloatingFloor": 667.0000001226399,
     "isMiddleAnchor": true,
-    "pillarADistance": 5603.848713522147,
-    "pillarBDistance": 5560.462125858585,
+    "pillarADistance": 5150.754994207217,
+    "pillarBDistance": 5115.010873744855,
     "pillarAPath": [
       [
         17.339233723794255,
@@ -16345,9 +16345,9 @@
         104.84988092836589
       ],
       [
-        11.7462412109375,
+        12.199927734375,
         25.16700000012264,
-        104.87459375
+        104.82459375
       ]
     ],
     "pillarBPath": [
@@ -16377,9 +16377,9 @@
         103.8968686558807
       ],
       [
-        22.849181640625,
+        22.405294921875,
         25.16700000012264,
-        103.8161328125
+        103.8561328125
       ]
     ],
     "pillarALabel": "P6",
@@ -16586,7 +16586,7 @@
     "distanceToFloatingFloor": 860.000000079177,
     "isMiddleAnchor": true,
     "pillarADistance": 5150.918156673599,
-    "pillarBDistance": 5578.450919227615,
+    "pillarBDistance": 5140.284765478206,
     "pillarAPath": [
       [
         -41.371747534832885,
@@ -16646,9 +16646,9 @@
         87.35277509806102
       ],
       [
-        -37.00953515625,
+        -37.35692578125,
         29.320000000079176,
-        87.852609375
+        87.58515625
       ]
     ],
     "pillarALabel": "P0",
@@ -16855,7 +16855,7 @@
     "distanceToFloatingFloor": 860.0000000909095,
     "isMiddleAnchor": true,
     "pillarADistance": 5019.480888962868,
-    "pillarBDistance": 5544.501637632177,
+    "pillarBDistance": 5080.758156531443,
     "pillarAPath": [
       [
         -32.92177539449852,
@@ -16915,9 +16915,9 @@
         93.21900476459004
       ],
       [
-        -28.159169921875,
+        -28.587115234375,
         29.32000000009091,
-        93.5998203125
+        93.412625
       ]
     ],
     "pillarALabel": "P1",
@@ -17392,7 +17392,7 @@
     "offsetY": 0.0,
     "distanceToFloatingFloor": 860.0000001087756,
     "isMiddleAnchor": true,
-    "pillarADistance": 5495.510742331276,
+    "pillarADistance": 5046.8424250101125,
     "pillarBDistance": 4986.834002246459,
     "pillarAPath": [
       [
@@ -17421,9 +17421,9 @@
         98.09609401468296
       ],
       [
-        -19.141169921875,
+        -18.7215859375,
         29.320000000108777,
-        97.821859375
+        97.980859375
       ]
     ],
     "pillarBPath": [
@@ -17661,8 +17661,8 @@
     "offsetY": 0.0,
     "distanceToFloatingFloor": 860.0000001146473,
     "isMiddleAnchor": true,
-    "pillarADistance": 5448.51971401405,
-    "pillarBDistance": 5615.363135671663,
+    "pillarADistance": 4991.006171926861,
+    "pillarBDistance": 5187.007684343928,
     "pillarAPath": [
       [
         -3.850771128183318,
@@ -17690,9 +17690,9 @@
         101.2412599324006
       ],
       [
-        -9.18771484375,
+        -8.742396484375,
         29.320000000114646,
-        101.075125
+        101.1801015625
       ]
     ],
     "pillarBPath": [
@@ -17722,9 +17722,9 @@
         102.84026755972127
       ],
       [
-        1.7089609375,
+        1.275192626953125,
         29.320000000114646,
-        102.937203125
+        102.9385
       ]
     ],
     "pillarALabel": "P4",
@@ -18200,7 +18200,7 @@
     "distanceToFloatingFloor": 860.0000001185654,
     "isMiddleAnchor": true,
     "pillarADistance": 5057.395976730533,
-    "pillarBDistance": 5446.070949628932,
+    "pillarBDistance": 5026.439152690881,
     "pillarAPath": [
       [
         6.752737095016462,
@@ -18260,9 +18260,9 @@
         103.3904435547443
       ],
       [
-        12.1948193359375,
+        11.775599609375,
         29.320000000118565,
-        103.36459375
+        103.38459375
       ]
     ],
     "pillarALabel": "P5",
@@ -18331,7 +18331,7 @@
     "distanceToFloatingFloor": 860.0000001190856,
     "isMiddleAnchor": true,
     "pillarADistance": 1414.7890889103667,
-    "pillarBDistance": 2018.4237025525058,
+    "pillarBDistance": 1611.6230241798016,
     "pillarAPath": [
       [
         31.028073399827786,
@@ -18361,9 +18361,9 @@
         100.20196515764876
       ],
       [
-        32.9608671875,
+        32.58415234375,
         29.320000000119087,
-        99.9566171875
+        100.1216171875
       ]
     ],
     "pillarALabel": "W2",
@@ -18671,7 +18671,7 @@
     "distanceToFloatingFloor": 860.0000001202825,
     "isMiddleAnchor": true,
     "pillarADistance": 5015.854768754273,
-    "pillarBDistance": 5558.707604353085,
+    "pillarBDistance": 5129.51087590568,
     "pillarAPath": [
       [
         17.20040947179278,
@@ -18731,9 +18731,9 @@
         102.47554282683501
       ],
       [
-        22.7159921875,
+        22.291111328125,
         29.32000000012028,
-        102.3761328125
+        102.438875
       ]
     ],
     "pillarALabel": "P6",
@@ -18940,7 +18940,7 @@
     "distanceToFloatingFloor": 2639.00000007818,
     "isMiddleAnchor": true,
     "pillarADistance": 5117.030072910809,
-    "pillarBDistance": 5535.961843929402,
+    "pillarBDistance": 5105.914392403046,
     "pillarAPath": [
       [
         -40.75899612496855,
@@ -19000,9 +19000,9 @@
         86.60390726721211
       ],
       [
-        -36.4653046875,
+        -36.7861484375,
         31.09900000007818,
-        87.1575859375
+        86.870640625
       ]
     ],
     "pillarALabel": "P0",
@@ -19209,7 +19209,7 @@
     "distanceToFloatingFloor": 2639.000000089767,
     "isMiddleAnchor": true,
     "pillarADistance": 4938.316406558549,
-    "pillarBDistance": 5530.057459909075,
+    "pillarBDistance": 5093.401435260025,
     "pillarAPath": [
       [
         -32.4108511207012,
@@ -19269,9 +19269,9 @@
         92.4003047771081
       ],
       [
-        -27.658728515625,
+        -28.05559375,
         31.099000000089767,
-        92.8001484375
+        92.6150546875
       ]
     ],
     "pillarALabel": "P1",
@@ -19478,7 +19478,7 @@
     "distanceToFloatingFloor": 2639.000000099455,
     "isMiddleAnchor": true,
     "pillarADistance": 4856.344892223296,
-    "pillarBDistance": 5427.025075815848,
+    "pillarBDistance": 4987.264263041304,
     "pillarAPath": [
       [
         -23.32149384169365,
@@ -19538,9 +19538,9 @@
         96.84967953977883
       ],
       [
-        -18.32903125,
+        -18.752306640625,
         31.099000000099455,
-        97.1030078125
+        96.9776640625
       ]
     ],
     "pillarALabel": "P2",
@@ -19747,7 +19747,7 @@
     "distanceToFloatingFloor": 2639.0000001074804,
     "isMiddleAnchor": true,
     "pillarADistance": 4942.21782875042,
-    "pillarBDistance": 5386.925428961687,
+    "pillarBDistance": 4949.794679734338,
     "pillarAPath": [
       [
         -13.711751194072217,
@@ -19807,9 +19807,9 @@
         100.09967224204284
       ],
       [
-        -8.5133193359375,
+        -8.942748046875,
         31.09900000010748,
-        100.2601015625
+        100.174984375
       ]
     ],
     "pillarALabel": "P3",
@@ -20016,7 +20016,7 @@
     "distanceToFloatingFloor": 2639.0000001132285,
     "isMiddleAnchor": true,
     "pillarADistance": 4925.209757454475,
-    "pillarBDistance": 5612.692025374345,
+    "pillarBDistance": 5197.813004977075,
     "pillarAPath": [
       [
         -3.6874073145343864,
@@ -20076,9 +20076,9 @@
         101.90674239793397
       ],
       [
-        1.872730224609375,
+        1.44960009765625,
         31.09900000011323,
-        101.97996875
+        102.0138828125
       ]
     ],
     "pillarALabel": "P4",
@@ -20554,7 +20554,7 @@
     "distanceToFloatingFloor": 2639.0000001171793,
     "isMiddleAnchor": true,
     "pillarADistance": 4935.532668396751,
-    "pillarBDistance": 5415.046224438055,
+    "pillarBDistance": 5000.428463558057,
     "pillarAPath": [
       [
         6.78731610257295,
@@ -20614,9 +20614,9 @@
         102.49083603642646
       ],
       [
-        12.1989013671875,
+        11.78465234375,
         31.09900000011718,
-        102.45959375
+        102.50459375
       ]
     ],
     "pillarALabel": "P5",
@@ -20685,7 +20685,7 @@
     "distanceToFloatingFloor": 2639.0000001175504,
     "isMiddleAnchor": true,
     "pillarADistance": 1373.1644581647292,
-    "pillarBDistance": 2067.8465411367456,
+    "pillarBDistance": 1664.7964009704547,
     "pillarAPath": [
       [
         30.764100667966268,
@@ -20715,9 +20715,9 @@
         99.3007671011254
       ],
       [
-        32.7543359375,
+        32.381724609375,
         31.09900000011755,
-        99.0366171875
+        99.2016171875
       ]
     ],
     "pillarALabel": "W2",
@@ -21025,7 +21025,7 @@
     "distanceToFloatingFloor": 2639.0000001187946,
     "isMiddleAnchor": true,
     "pillarADistance": 4926.1788209989345,
-    "pillarBDistance": 5545.805637985611,
+    "pillarBDistance": 5126.5933167764115,
     "pillarAPath": [
       [
         17.11198208125835,
@@ -21085,9 +21085,9 @@
         101.54727468312835
       ],
       [
-        22.59988671875,
+        22.200662109375,
         31.099000000118796,
-        101.3561328125
+        101.5125390625
       ]
     ],
     "pillarALabel": "P6",
