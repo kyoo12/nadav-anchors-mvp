@@ -39,6 +39,7 @@ const formatFloor = (f: number) => f === 8 ? 'Roof' : `Floor ${f}`;
 
 function App() {
   const [visibleFloors, setVisibleFloors] = useState<Set<number>>(new Set());
+  const [showRegularAnchors, setShowRegularAnchors] = useState(true);
   const [floors, setFloors] = useState<number[]>([]);
   const [selectedAnchor, setSelectedAnchor] = useState<Anchor | null>(null);
   const [searchQuery, setSearchQuery] = useState('');
