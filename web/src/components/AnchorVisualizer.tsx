@@ -14,6 +14,7 @@ export interface Anchor {
   yaw: number;
   metadata?: string;
   distanceToConcrete?: number;
+  distanceToFloatingFloor?: number;
 }
 
 // Pre-allocate colors to prevent memory leaks during rapid hovering

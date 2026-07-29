@@ -102,16 +102,12 @@ export default function RightSidebar({ selectedAnchor, allAnchors, onClose }: Pr
           <div className="detail-section">
             <h2>Position & Orientation</h2>
             <div className="detail-item">
-              <span className="detail-label">X</span>
-              <span className="detail-value">{selectedAnchor.x.toFixed(3)} m</span>
-            </div>
-            <div className="detail-item">
-              <span className="detail-label">Y (Elev)</span>
-              <span className="detail-value">{selectedAnchor.y.toFixed(3)} m</span>
-            </div>
-            <div className="detail-item">
-              <span className="detail-label">Z</span>
-              <span className="detail-value">{selectedAnchor.z.toFixed(3)} m</span>
+              <span className="detail-label">Distance to Concrete Floor (Z)</span>
+              <span className="detail-value">
+                {selectedAnchor.distanceToFloatingFloor !== undefined && selectedAnchor.distanceToFloatingFloor !== 0 ? 
+                  `${selectedAnchor.distanceToFloatingFloor > 0 ? '+' : ''}${selectedAnchor.distanceToFloatingFloor.toFixed(1)} mm` 
+                  : 'N/A'}
+              </span>
             </div>
             <div className="detail-item">
               <span className="detail-label">Pitch</span>

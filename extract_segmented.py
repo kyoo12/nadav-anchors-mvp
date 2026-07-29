@@ -23,6 +23,10 @@ def build_dxf_mapping(dxf_path):
         print(f"Warning: Could not load DXF mapping ({e}). Names may be UNKNOWN.")
     return mapping
 
+def extract_gridlines(model):
+    # Fallback to prevent crash
+    return [], []
+
 def main():
     print("Loading 3DM file...")
     model = rhino3dm.File3dm.Read("modelForNadav.3dm")
@@ -56,6 +60,23 @@ def main():
     concrete_tree = None
     if len(concrete_pts) > 0:
         concrete_tree = KDTree(concrete_pts)
+
+    ff_idx = -1
+    for layer in model.Layers:
+        if layer.Name == 'floting_floor':
+            ff_idx = layer.Index
+            break
+
+    ff_pts = []
+    print("Building Floating Floor KDTree...")
+    for obj in model.Objects:
+        if obj.Attributes.LayerIndex == ff_idx and obj.Geometry.ObjectType == rhino3dm.ObjectType.Mesh:
+            for v in obj.Geometry.Vertices:
+                ff_pts.append((v.X, v.Y, v.Z))
+
+    ff_tree = None
+    if len(ff_pts) > 0:
+        ff_tree = KDTree(ff_pts)
 
     raw_blocks = []
     
@@ -194,6 +215,12 @@ def main():
             
         final_metadata = f"{std_an} | {std_pl}"
         
+        dist_to_ff = 0.0
+        if ff_tree and pl_block:
+            _, idx = ff_tree.query([pl_block['x'], pl_block['y'], pl_block['z']])
+            closest_ff_z = ff_pts[idx][2]
+            dist_to_ff = pl_block['z'] - closest_ff_z
+        
         if len(cluster_names) >= 2:
             anchors.append({
                 'rhino_x': pl_block['x'],
@@ -209,7 +236,8 @@ def main():
                 'nearestGridX': nearest_grid_x,
                 'offsetX': offset_x,
                 'nearestGridY': nearest_grid_y,
-                'offsetY': offset_y
+                'offsetY': offset_y,
+                'distanceToFloatingFloor': dist_to_ff
             })
             
     print(f"Clustered into {len(anchors)} anchor locations.")
@@ -334,7 +362,8 @@ def main():
                 'nearestGridX': a.get('nearestGridX', 'N/A'),
                 'offsetX': float(a.get('offsetX', 0.0)),
                 'nearestGridY': a.get('nearestGridY', 'N/A'),
-                'offsetY': float(a.get('offsetY', 0.0))
+                'offsetY': float(a.get('offsetY', 0.0)),
+                'distanceToFloatingFloor': float(a.get('distanceToFloatingFloor', 0.0))
             })
             
     with open('web/public/true_anchors.json', 'w', encoding='utf-8') as f:
