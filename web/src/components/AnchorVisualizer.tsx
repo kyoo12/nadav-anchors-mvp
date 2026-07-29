@@ -18,8 +18,8 @@ export interface Anchor {
   isMiddleAnchor?: boolean;
   pillarADistance?: number;
   pillarBDistance?: number;
-  pillarAPoint?: [number, number, number];
-  pillarBPoint?: [number, number, number];
+  pillarAPath?: [number, number, number][];
+  pillarBPath?: [number, number, number][];
 }
 
 // Pre-allocate colors to prevent memory leaks during rapid hovering
@@ -238,12 +238,12 @@ export default function AnchorVisualizer({ anchors, visibleFloors, onSelectAncho
       
       {/* 3D Verification Lines to Pillars for hovered/selected Middle Anchors */}
       {middleAnchors.map(a => {
-        if (!a.pillarAPoint || !a.pillarBPoint) return null;
+        if (!a.pillarAPath || !a.pillarBPath) return null;
         if (a.id !== selectedAnchorId && a.id !== hoveredAnchorId) return null;
         return (
           <group key={`lines-${a.id}`}>
-            <Line points={[[a.x, a.y, a.z], a.pillarAPoint]} color="#ea580c" lineWidth={2} dashed={true} dashSize={0.5} gapSize={0.2} opacity={0.6} transparent />
-            <Line points={[[a.x, a.y, a.z], a.pillarBPoint]} color="#ea580c" lineWidth={2} dashed={true} dashSize={0.5} gapSize={0.2} opacity={0.6} transparent />
+            <Line points={a.pillarAPath} color="#10b981" lineWidth={3} dashed={false} opacity={0.8} transparent />
+            <Line points={a.pillarBPath} color="#3b82f6" lineWidth={3} dashed={false} opacity={0.8} transparent />
           </group>
         )
       })}
