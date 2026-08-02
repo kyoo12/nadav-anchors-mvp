@@ -86,8 +86,10 @@ def main():
                 ff_pts.append((v.X, v.Y, v.Z))
 
     ff_tree = None
+    ff_tree_2d = None
     if len(ff_pts) > 0:
         ff_tree = KDTree(ff_pts)
+        ff_tree_2d = KDTree([[p[0], p[1]] for p in ff_pts])
 
     col_idx = -1
     for layer in model.Layers:
@@ -247,7 +249,9 @@ def main():
         
         dist_to_ff = 0.0
         if ff_tree and pl_block:
-            _, idx = ff_tree.query([pl_block['x'], pl_block['y'], pl_block['z']])
+            # We want the floating floor point directly underneath/above the anchor (ignoring Z distance)
+            # So we use a 2D distance query!
+            _, idx = ff_tree_2d.query([pl_block['x'], pl_block['y']])
             closest_ff_z = ff_pts[idx][2]
             dist_to_ff = pl_block['z'] - closest_ff_z
         
@@ -333,7 +337,10 @@ def main():
         for i in range(len(col)):
             curr_a = col[i]
             
-            if i == 0:
+            if len(col) == 1:
+                prev_a = curr_a
+                next_a = curr_a
+            elif i == 0:
                 prev_a = col[i]
                 next_a = col[i+1]
             elif i == len(col) - 1:
