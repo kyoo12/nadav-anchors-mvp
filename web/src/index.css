@@ -11,13 +11,13 @@
  */
 
 :root[data-theme="field"] {
-  --bg-dark: #f1f5f9;
-  --bg-panel: #ffffff;
-  --border-glass: #cbd5e1;
-  --accent-blue: #0284c7;
-  --accent-cyan: #ea580c;
-  --text-main: #0f172a;
-  --text-muted: #475569;
+  --bg-dark: #F8FAFC;
+  --bg-panel: rgba(255, 255, 255, 0.9);
+  --border-glass: rgba(148, 163, 184, 0.4);
+  --accent-blue: #0284C7;
+  --accent-cyan: #3B82F6;
+  --text-main: #0F172A;
+  --text-muted: #64748B;
 }
 
 :root {
@@ -51,10 +51,10 @@ body {
 
 /* Glassmorphism Classes */
 .glass-panel {
-  background: rgba(15, 23, 42, 0.7);
-  backdrop-filter: blur(24px);
-  -webkit-backdrop-filter: blur(24px);
-  border: 1px solid rgba(99, 102, 241, 0.3);
+  background: linear-gradient(145deg, rgba(15, 23, 42, 0.75), rgba(2, 6, 23, 0.85));
+  backdrop-filter: blur(32px);
+  -webkit-backdrop-filter: blur(32px);
+  border: 1px solid rgba(255, 255, 255, 0.08);
   border-radius: 24px;
   box-shadow: 0 30px 60px rgba(0, 0, 0, 0.12);
 }
@@ -79,6 +79,8 @@ body {
   display: flex;
   flex-direction: column;
   gap: 16px;
+  flex: 1;
+  min-height: 0;
   padding-right: 8px; /* for scrollbar */
 }
 
@@ -108,8 +110,8 @@ body {
 }
 
 .floor-toggles {
-  display: flex;
-  flex-direction: column;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
   gap: 12px;
 }
 
@@ -134,13 +136,17 @@ body {
 
 .floor-toggle.active {
   border: 1px solid var(--accent-blue);
-  background: transparent;
-  color: var(--text-main);
-  box-shadow: 0 0 15px rgba(0, 240, 255, 0.2) inset, 0 0 10px rgba(0, 240, 255, 0.2);
+  background: linear-gradient(135deg, rgba(0, 240, 255, 0.1), rgba(176, 38, 255, 0.1));
+  color: var(--accent-blue);
+  box-shadow: 0 0 15px rgba(0, 240, 255, 0.2);
+}
+:root[data-theme="field"] .floor-toggle.active {
+  background: rgba(2, 132, 199, 0.05);
+  box-shadow: none;
 }
 .floor-toggle.active .toggle-count {
   background: var(--accent-blue);
-  color: #020617;
+  color: var(--bg-dark);
   font-family: 'Roboto Mono', monospace;
   font-weight: bold;
 }
