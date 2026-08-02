@@ -181,8 +181,8 @@ export default function RightSidebar({ selectedAnchor, allAnchors, onClose }: Pr
               <span className="detail-value">{details.below} {details.below !== 'N/A' && 'mm'}</span>
             </div>
             <div className="detail-item">
-              <span className="detail-label">Distance to Concrete</span>
-              <span className="detail-value">
+              <span className="detail-label" style={{ color: 'var(--accent-cyan)' }}>Required Shim Thickness</span>
+              <span className="detail-value" style={{ fontWeight: 800, color: 'var(--text-main)', padding: '4px 8px', background: 'var(--accent-blue)', borderRadius: '6px' }}>
                 {selectedAnchor.distanceToConcrete !== undefined ? `${selectedAnchor.distanceToConcrete.toFixed(1)} mm` : 'Pending'}
               </span>
             </div>
