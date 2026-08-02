@@ -30,6 +30,7 @@ export interface Anchor {
   offsetY?: number;
   distanceToConcrete?: number;
   distanceToFloatingFloor?: number;
+  placementError?: boolean;
   isMiddleAnchor?: boolean;
   pillarADistance?: number;
   pillarBDistance?: number;
@@ -138,6 +139,7 @@ export default function AnchorVisualizer({ anchors, visibleFloors, onSelectAncho
         
         if (isSelected) refAN.current!.setColorAt(i, COLOR_WHITE);
         else if (isHovered) refAN.current!.setColorAt(i, COLOR_CYAN);
+        else if (anchor.placementError) refAN.current!.setColorAt(i, COLOR_RED);
         else refAN.current!.setColorAt(i, getAnColor(anName)); // e.g. Blue
         
         // --- PL MESH (Bottom Half) ---
@@ -150,6 +152,7 @@ export default function AnchorVisualizer({ anchors, visibleFloors, onSelectAncho
         
         if (isSelected) refPL.current!.setColorAt(i, COLOR_WHITE);
         else if (isHovered) refPL.current!.setColorAt(i, COLOR_CYAN);
+        else if (anchor.placementError) refPL.current!.setColorAt(i, COLOR_RED);
         else refPL.current!.setColorAt(i, getPlColor(plName)); // e.g. Orange
       });
       

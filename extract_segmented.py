@@ -170,6 +170,8 @@ def main():
                 
         # Calculate Distance to Concrete dynamically using a robust raycast
         dist_to_concrete = 0.0
+        placement_error = False
+        ideal_gap = 140.0 # Default fallback
         if concrete_tree and an_block and pl_block:
             pt = (an_block['x'], an_block['y'])
             
@@ -208,6 +210,8 @@ def main():
                     
                 # Ignore points that belong to the exploded anchor mesh itself
                 if proj_from_an > min_dist:
+                    ideal_gap = min_dist
+
                     # If it's valid, find the total distance from the PL block!
                     dx_pl = c_pt[0] - pl_block['x']
                     dy_pl = c_pt[1] - pl_block['y']
@@ -217,7 +221,17 @@ def main():
                         best_dist = proj_from_pl
                         
             if best_dist < 999999:
-                dist_to_concrete = best_dist
+                # 1. Sanity Audit
+                if best_dist < 20.0 or best_dist > ideal_gap + 300.0:
+                    placement_error = True
+                    dist_to_concrete = best_dist
+                else:
+                    # 2. Surface Snapping Auto-Correction
+                    shift_amount = best_dist - ideal_gap
+                    if abs(shift_amount) > 1.0:
+                        pl_block['x'] += shift_amount * vy_x
+                        pl_block['y'] += shift_amount * vy_y
+                    dist_to_concrete = ideal_gap
         
         # Map PL Block using DXF dictionary
         pl_name = pl_block['name'].upper() if pl_block else ""
@@ -270,7 +284,8 @@ def main():
                 'offsetX': offset_x,
                 'nearestGridY': nearest_grid_y,
                 'offsetY': offset_y,
-                'distanceToFloatingFloor': dist_to_ff
+                'distanceToFloatingFloor': dist_to_ff,
+                'placementError': placement_error
             })
             
     print(f"Clustered into {len(anchors)} anchor locations.")
@@ -537,6 +552,7 @@ def main():
                 'nearestGridY': a.get('nearestGridY', 'N/A'),
                 'offsetY': float(a.get('offsetY', 0.0)),
                 'distanceToFloatingFloor': float(a.get('distanceToFloatingFloor', 0.0)),
+                'placementError': bool(a.get('placementError', False)),
                 'isMiddleAnchor': is_middle,
                 'pillarADistance': pillar_a_dist,
                 'pillarBDistance': pillar_b_dist,
