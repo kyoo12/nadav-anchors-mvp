@@ -306,6 +306,20 @@ def main():
             a['angle'] = math.atan2(a['rhino_y'] - cy, a['rhino_x'] - cx)
         f.sort(key=lambda a: a['angle'])
         
+    # Align floors to Floor 0 to prevent index wrapping caused by building twist
+    for f_idx in range(len(floors) - 1):
+        curr_floor = floors[f_idx]
+        next_floor = floors[f_idx + 1]
+        
+        a0 = curr_floor[0]
+        pts_next = np.array([[math.cos(a['angle']), math.sin(a['angle'])] for a in next_floor])
+        tree_next = KDTree(pts_next)
+        
+        target_pt = [math.cos(a0['angle']), math.sin(a0['angle'])]
+        dist_val, idx = tree_next.query(target_pt)
+        
+        floors[f_idx + 1] = next_floor[idx:] + next_floor[:idx]
+        
     for f_idx in range(len(floors)):
         curr_floor = floors[f_idx]
         
