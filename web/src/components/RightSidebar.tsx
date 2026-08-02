@@ -8,7 +8,9 @@ interface Props {
   onClose: () => void;
 }
 
+import { useState } from 'react';
 export default function RightSidebar({ selectedAnchor, allAnchors, onClose }: Props) {
+  const [isRightCollapsed, setIsRightCollapsed] = useState(false);
   const details = useMemo(() => {
     if (!selectedAnchor) return null;
 
@@ -64,11 +66,36 @@ export default function RightSidebar({ selectedAnchor, allAnchors, onClose }: Pr
       {selectedAnchor && details && (
         <motion.div 
           initial={{ opacity: 0, scale: 0.95, y: 20 }}
-          animate={{ opacity: 1, scale: 1, y: 0 }}
+          animate={{ opacity: 1, scale: 1, y: 0, x: isRightCollapsed ? '110%' : 0 }}
           exit={{ opacity: 0, scale: 0.95, y: 20 }}
           transition={{ duration: 0.2 }}
-          className="sidebar right glass-panel"
+          className="sidebar-container right glass-panel"
         >
+          <button 
+            onClick={() => setIsRightCollapsed(!isRightCollapsed)}
+            style={{
+              position: 'absolute',
+              left: '-60px',
+              top: '0',
+              width: '48px',
+              height: '48px',
+              borderRadius: '12px',
+              background: 'var(--bg-panel)',
+              border: '1px solid var(--border-glass)',
+              color: 'var(--text-main)',
+              cursor: 'pointer',
+              zIndex: 20,
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'center',
+              fontSize: '1.2rem',
+              fontWeight: 'bold',
+              pointerEvents: 'auto',
+              boxShadow: '0 4px 12px rgba(0,0,0,0.1)'
+            }}
+          >
+            {isRightCollapsed ? '<<' : '>>'}
+          </button>
           <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '16px' }}>
             <h1 style={{ margin: 0, fontSize: '1.25rem' }}>Anchor Details</h1>
             <button 

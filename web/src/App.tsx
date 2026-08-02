@@ -61,6 +61,7 @@ function App() {
 
   
   const [theme, setTheme] = useState<'midnight' | 'field'>('midnight');
+  const [isLeftCollapsed, setIsLeftCollapsed] = useState(false);
   const [visibleFloors, setVisibleFloors] = useState<Set<number>>(new Set());
   
   useEffect(() => {
@@ -180,9 +181,34 @@ function App() {
       <motion.div 
         className="sidebar-container"
         initial={{ x: -400, opacity: 0 }}
-        animate={{ x: 0, opacity: 1 }}
+        animate={{ x: isLeftCollapsed ? '-110%' : 0, opacity: 1 }}
         transition={{ duration: 0.5, ease: "easeOut" }}
       >
+        <button 
+          onClick={() => setIsLeftCollapsed(!isLeftCollapsed)}
+          style={{
+            position: 'absolute',
+            right: '-60px',
+            top: '0',
+            width: '48px',
+            height: '48px',
+            borderRadius: '12px',
+            background: 'var(--bg-panel)',
+            border: '1px solid var(--border-glass)',
+            color: 'var(--text-main)',
+            cursor: 'pointer',
+            zIndex: 20,
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'center',
+            fontSize: '1.2rem',
+            fontWeight: 'bold',
+            pointerEvents: 'auto',
+            boxShadow: '0 4px 12px rgba(0,0,0,0.1)'
+          }}
+        >
+          {isLeftCollapsed ? '>>' : '<<'}
+        </button>
         
         {/* Module A: Header & Actions */}
         <div className="glass-panel" style={{ display: 'flex', flexDirection: 'column', gap: '16px' }}>
