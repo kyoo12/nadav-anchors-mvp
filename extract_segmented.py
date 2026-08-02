@@ -171,7 +171,7 @@ def main():
         # Calculate Distance to Concrete dynamically using a robust raycast
         dist_to_concrete = 0.0
         placement_error = False
-        placement_error_amount = 0.0
+        shim_thickness = 0.0
         ideal_gap = 140.0 # Default fallback
         if concrete_tree and an_block and pl_block:
             pt = (an_block['x'], an_block['y'])
@@ -202,21 +202,20 @@ def main():
                 if abs(proj_from_pl) < abs(best_dist) if best_dist != 999999 else True:
                     best_dist = proj_from_pl
                     
-            placement_error_amount = 0.0
+            shim_thickness = 0.0
             if best_dist < 999999:
-                # 1. Calculate True Placement Error (Ideal gap for PL block is 0.0)
-                placement_error_amount = best_dist
+                # 1. Calculate True Required Shim Thickness (Ideal gap for PL block is 0.0)
+                shim_thickness = best_dist
                 dist_to_concrete = best_dist
                 
                 # 2. Sanity Audit
-                # If it penetrates wall severely (< -100) or hovers too far (> 150)
-                if best_dist < -100.0 or best_dist > 150.0:
+                # If it penetrates wall severely (< -20) or hovers impossibly far (> 300)
+                if best_dist < -20.0 or best_dist > 300.0:
                     placement_error = True
-                else:
-                    # 3. Surface Snapping Auto-Correction
-                    if abs(placement_error_amount) > 1.0:
-                        pl_block['x'] += placement_error_amount * vy_x
-                        pl_block['y'] += placement_error_amount * vy_y
+                
+                # NOTE: We have REMOVED the auto-snapping logic completely!
+                # The anchors will export at their true CAD coordinates to preserve the perfectly straight facade alignment.
+
 
                         # Notice we DO NOT overwrite dist_to_concrete. 
                         # We let the front-end display the TRUE dist_to_concrete and error!
@@ -269,7 +268,7 @@ def main():
                 'nearestGridY': nearest_grid_y,
                 'offsetY': offset_y,
                 'distanceToFloatingFloor': dist_to_ff,
-                'placementErrorAmount': placement_error_amount,
+                'shimThickness': shim_thickness,
                 'placementError': placement_error
             })
             
@@ -537,7 +536,7 @@ def main():
                 'nearestGridY': a.get('nearestGridY', 'N/A'),
                 'offsetY': float(a.get('offsetY', 0.0)),
                 'distanceToFloatingFloor': float(a.get('distanceToFloatingFloor', 0.0)),
-                'placementErrorAmount': float(a.get('placementErrorAmount', 0.0)),
+                'shimThickness': float(a.get('shimThickness', 0.0)),
                 'placementError': bool(a.get('placementError', False)),
                 'isMiddleAnchor': is_middle,
                 'pillarADistance': pillar_a_dist,

@@ -140,7 +140,7 @@ function App() {
     });
     const header = "PointID,X,Y,Z,Floor,Type,NearestGridX,OffsetX,NearestGridY,OffsetY,WallGap\\n";
     const rows = visibleAnchors.map(a => 
-      `${a.id},${a.x.toFixed(3)},${a.y.toFixed(3)},${a.z.toFixed(3)},${a.floor},${a.metadata},${a.nearestGridX},${(a.offsetX || 0).toFixed(1)},${a.nearestGridY},${(a.offsetY || 0).toFixed(1)},${(a.distanceToConcrete || 0).toFixed(1)},${(a.placementErrorAmount || 0).toFixed(1)}`
+      `${a.id},${a.x.toFixed(3)},${a.y.toFixed(3)},${a.z.toFixed(3)},${a.floor},${a.metadata},${a.nearestGridX},${(a.offsetX || 0).toFixed(1)},${a.nearestGridY},${(a.offsetY || 0).toFixed(1)},${(a.distanceToConcrete || 0).toFixed(1)},${(a.shimThickness || 0).toFixed(1)}`
     ).join("\\n");
     
     const blob = new Blob([header + rows], { type: 'text/csv' });

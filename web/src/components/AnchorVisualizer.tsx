@@ -31,7 +31,7 @@ export interface Anchor {
   distanceToConcrete?: number;
   distanceToFloatingFloor?: number;
   placementError?: boolean;
-  placementErrorAmount?: number;
+  shimThickness?: number;
   isMiddleAnchor?: boolean;
   pillarADistance?: number;
   pillarBDistance?: number;
