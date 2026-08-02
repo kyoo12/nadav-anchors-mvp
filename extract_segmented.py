@@ -153,7 +153,7 @@ def main():
         if i in visited:
             continue
         
-        neighbors = tree.query_ball_point(pts_blocks[i], 500)
+        neighbors = tree.query_ball_point(pts_blocks[i], 150)
         
         cluster_names = []
         pl_block = raw_blocks[i]
@@ -171,6 +171,7 @@ def main():
         # Calculate Distance to Concrete dynamically using a robust raycast
         dist_to_concrete = 0.0
         placement_error = False
+        placement_error_amount = 0.0
         ideal_gap = 140.0 # Default fallback
         if concrete_tree and an_block and pl_block:
             pt = (an_block['x'], an_block['y'])
@@ -215,23 +216,33 @@ def main():
                     # If it's valid, find the total distance from the PL block!
                     dx_pl = c_pt[0] - pl_block['x']
                     dy_pl = c_pt[1] - pl_block['y']
-                    proj_from_pl = abs(dx_pl * vy_x + dy_pl * vy_y)
+                    proj_from_pl = dx_pl * vy_x + dy_pl * vy_y
                     
-                    if proj_from_pl < best_dist:
+                    # We want the absolute value ONLY to find the closest concrete vertex, 
+                    # but we must preserve the sign (embedded vs gap).
+                    if abs(proj_from_pl) < abs(best_dist) if best_dist != 999999 else True:
                         best_dist = proj_from_pl
                         
+            placement_error_amount = 0.0
             if best_dist < 999999:
-                # 1. Sanity Audit
+                # 1. Calculate True Placement Error
+                placement_error_amount = best_dist - ideal_gap
+                
+                # Report the TRUE distance, not the snapped distance!
+                dist_to_concrete = best_dist
+                
+                # 2. Sanity Audit
+                # If it penetrates wall (best_dist < 20) or hovers too far
                 if best_dist < 20.0 or best_dist > ideal_gap + 300.0:
                     placement_error = True
-                    dist_to_concrete = best_dist
                 else:
-                    # 2. Surface Snapping Auto-Correction
-                    shift_amount = best_dist - ideal_gap
-                    if abs(shift_amount) > 1.0:
-                        pl_block['x'] += shift_amount * vy_x
-                        pl_block['y'] += shift_amount * vy_y
-                    dist_to_concrete = ideal_gap
+                    # 3. Surface Snapping Auto-Correction (for Visual 3D model ONLY)
+                    # We still shift the coordinates in the JSON so the 3D viewer looks perfect.
+                    if abs(placement_error_amount) > 1.0:
+                        pl_block['x'] += placement_error_amount * vy_x
+                        pl_block['y'] += placement_error_amount * vy_y
+                        # Notice we DO NOT overwrite dist_to_concrete. 
+                        # We let the front-end display the TRUE dist_to_concrete and error!
         
         # Map PL Block using DXF dictionary
         pl_name = pl_block['name'].upper() if pl_block else ""
@@ -245,20 +256,16 @@ def main():
         nearest_grid_x = "N/A"
         offset_x = 0.0
         if grid_x and pl_block:
-            # grid_x contains (label, X-coordinate)
-            # Find closest X
             best_x = min(grid_x, key=lambda g: abs(g[1] - pl_block['x']))
             nearest_grid_x = best_x[0]
-            offset_x = abs(best_x[1] - pl_block['x'])
+            offset_x = pl_block['x'] - best_x[1] # Positive = East of grid
             
         nearest_grid_y = "N/A"
         offset_y = 0.0
         if grid_y and pl_block:
-            # grid_y contains (label, Y-coordinate)
-            # Find closest Y
             best_y = min(grid_y, key=lambda g: abs(g[1] - pl_block['y']))
             nearest_grid_y = best_y[0]
-            offset_y = abs(best_y[1] - pl_block['y'])
+            offset_y = pl_block['y'] - best_y[1] # Positive = North of grid
             
         final_metadata = f"{std_an} | {std_pl}"
         
@@ -285,6 +292,7 @@ def main():
                 'nearestGridY': nearest_grid_y,
                 'offsetY': offset_y,
                 'distanceToFloatingFloor': dist_to_ff,
+                'placementErrorAmount': placement_error_amount,
                 'placementError': placement_error
             })
             
@@ -386,7 +394,7 @@ def main():
     # ------------------ EXPORT ------------------
     export_anchors = []
     for f_idx in range(len(floors)):
-        floor_group = [col[f_idx] for col in columns]
+        floor_group = [col[f_idx] for col in columns if f_idx < len(col)]
         
         # Calculate centroid to sort radially
         cx = sum(a['rhino_x'] for a in floor_group) / len(floor_group)
@@ -552,6 +560,7 @@ def main():
                 'nearestGridY': a.get('nearestGridY', 'N/A'),
                 'offsetY': float(a.get('offsetY', 0.0)),
                 'distanceToFloatingFloor': float(a.get('distanceToFloatingFloor', 0.0)),
+                'placementErrorAmount': float(a.get('placementErrorAmount', 0.0)),
                 'placementError': bool(a.get('placementError', False)),
                 'isMiddleAnchor': is_middle,
                 'pillarADistance': pillar_a_dist,
