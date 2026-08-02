@@ -375,40 +375,45 @@ def main():
             is_roof = (f_idx == len(floors) - 1)
             floor_prefix = "Roof" if is_roof else f"F{f_idx}"
             
-            # Dynamic Middle Anchor Logic
+            # Exact Count-Based Geometric Middle Anchor Logic
             panels = [('P0', 'P1'), ('P1', 'P2'), ('P2', 'P3'), ('P3', 'P4'), ('P4', 'P5'), ('P5', 'P6'), ('P6', 'P7'), ('P7', 'W1'), ('W2', 'P8'), ('P8', 'P9')]
             
             is_middle = False
             name_a, name_b = None, None
             
-            # Find which panel this anchor belongs to (if it is the middle one)
+            # Calculate LOCAL centroid for this floor to prevent curvature distortion
+            local_cx = sum(temp_a['rhino_x'] for temp_a in radial_group) / len(radial_group)
+            local_cy = sum(temp_a['rhino_y'] for temp_a in radial_group) / len(radial_group)
+            
             for p_a, p_b in panels:
                 tree_a = pillars_data.get(p_a)
                 tree_b = pillars_data.get(p_b)
                 if not tree_a or not tree_b: continue
                 
-                # We need to find the closest anchors to P_a and P_b in the ENTIRE radial group
-                best_a_idx, dist_a = -1, float('inf')
-                best_b_idx, dist_b = -1, float('inf')
+                pts_a = tree_a['pts_3d']
+                pts_b = tree_b['pts_3d']
                 
+                a3 = math.atan2(sum(p[1] for p in pts_a)/len(pts_a) - local_cy, sum(p[0] for p in pts_a)/len(pts_a) - local_cx)
+                a4 = math.atan2(sum(p[1] for p in pts_b)/len(pts_b) - local_cy, sum(p[0] for p in pts_b)/len(pts_b) - local_cx)
+                
+                in_panel = []
                 for idx, temp_a in enumerate(radial_group):
-                    pt = [temp_a['rhino_x'], temp_a['rhino_y']]
-                    da, _ = tree_a['tree'].query(pt)
-                    if da < dist_a:
-                        dist_a = da
-                        best_a_idx = idx
-                        
-                    db, _ = tree_b['tree'].query(pt)
-                    if db < dist_b:
-                        dist_b = db
-                        best_b_idx = idx
-                
-                if best_a_idx > best_b_idx and abs(best_a_idx - best_b_idx) > len(radial_group)/2:
-                    mid_idx = (best_a_idx + best_b_idx + len(radial_group)) // 2
-                    mid_idx = mid_idx % len(radial_group)
-                else:
-                    mid_idx = (best_a_idx + best_b_idx) // 2
+                    ang = math.atan2(temp_a['rhino_y'] - local_cy, temp_a['rhino_x'] - local_cx)
+                    ang_norm = (ang + 2*math.pi) % (2*math.pi)
+                    a3_norm = (a3 + 2*math.pi) % (2*math.pi)
+                    a4_norm = (a4 + 2*math.pi) % (2*math.pi)
                     
+                    diff_a3_ang = (ang_norm - a3_norm) % (2*math.pi)
+                    diff_a3_a4 = (a4_norm - a3_norm) % (2*math.pi)
+                    
+                    if diff_a3_ang < diff_a3_a4:
+                        in_panel.append(idx)
+                        
+                if not in_panel: continue
+                
+                in_panel_sorted = sorted(in_panel, key=lambda idx: ((math.atan2(radial_group[idx]['rhino_y'] - local_cy, radial_group[idx]['rhino_x'] - local_cx) + 2*math.pi) % (2*math.pi) - a3_norm) % (2*math.pi))
+                mid_idx = in_panel_sorted[len(in_panel_sorted)//2]
+                
                 if i == mid_idx:
                     is_middle = True
                     name_a = p_a
