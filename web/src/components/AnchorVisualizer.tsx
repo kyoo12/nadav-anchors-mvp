@@ -77,6 +77,7 @@ interface Props {
   onSelectAnchor: (anchor: Anchor | null) => void;
   selectedAnchorId: string | null;
   showRegularAnchors?: boolean;
+  visibleBrackets: Set<string>;
 }
 
 const halfGeometry = new THREE.BoxGeometry(0.6, 0.3, 0.15);
@@ -91,17 +92,21 @@ const plateMaterial = new THREE.MeshStandardMaterial({
 // Pre-allocate a single dummy object to prevent GC stuttering in loops
 const dummy = new THREE.Object3D();
 
-export default function AnchorVisualizer({ anchors, visibleFloors, onSelectAnchor, selectedAnchorId, showRegularAnchors = true }: Props) {
+export default function AnchorVisualizer({ anchors, visibleFloors, onSelectAnchor, selectedAnchorId, showRegularAnchors = true, visibleBrackets }: Props) {
   const meshRefPL = useRef<THREE.InstancedMesh>(null);
   const meshRefAN = useRef<THREE.InstancedMesh>(null);
   const meshRefSpherePL = useRef<THREE.InstancedMesh>(null);
   const meshRefSphereAN = useRef<THREE.InstancedMesh>(null);
   const [hoveredAnchorId, setHoveredAnchorId] = useState<string | null>(null);
 
-  // Filter anchors based on visible floors
+  // Filter anchors based on visible floors and visible brackets
   const visibleAnchors = useMemo(() => {
-    return anchors.filter(a => visibleFloors.has(a.floor));
-  }, [anchors, visibleFloors]);
+    return anchors.filter(a => {
+      const parts = (a.metadata || '').split('|');
+      const typeName = parts[0]?.trim() || '';
+      return visibleFloors.has(a.floor) && visibleBrackets.has(typeName);
+    });
+  }, [anchors, visibleFloors, visibleBrackets]);
 
   const regularAnchors = useMemo(() => showRegularAnchors ? visibleAnchors.filter(a => !a.isMiddleAnchor) : [], [visibleAnchors, showRegularAnchors]);
   const middleAnchors = useMemo(() => visibleAnchors.filter(a => a.isMiddleAnchor), [visibleAnchors]);
