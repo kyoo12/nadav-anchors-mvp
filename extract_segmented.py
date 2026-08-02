@@ -256,15 +256,17 @@ def main():
             dist_to_ff = pl_block['z'] - closest_ff_z
         
         if len(cluster_names) >= 2:
+            # Use AN block for physical visual coordinates (facade line)
+            b_src = an_block if an_block else pl_block
             anchors.append({
-                'rhino_x': pl_block['x'],
-                'rhino_y': pl_block['y'],
-                'rhino_z': pl_block['z'],
-                'm00': pl_block['m00'],
-                'm10': pl_block['m10'],
-                'm01': pl_block['m01'],
-                'm11': pl_block['m11'],
-                'rhino_yaw': pl_block['rhino_yaw'],
+                'rhino_x': b_src['x'],
+                'rhino_y': b_src['y'],
+                'rhino_z': b_src['z'],
+                'm00': b_src['m00'],
+                'm10': b_src['m10'],
+                'm01': b_src['m01'],
+                'm11': b_src['m11'],
+                'rhino_yaw': b_src['rhino_yaw'],
                 'metadata': final_metadata,
                 'distanceToConcrete': dist_to_concrete,
                 'nearestGridX': nearest_grid_x,
@@ -293,99 +295,64 @@ def main():
     
     print(f"Detected {len(floors)} floors.")
     
-    # ------------------ VERTICAL COLUMN MAPPING ------------------
-    # We will map each anchor on Floor 1 to the closest anchor on Floor 2, etc.
-    # We store this as an array of columns: columns[i] = [F1_anchor, F2_anchor, ...]
+    # ------------------ VERTICAL COLUMN MAPPING (Unit Circle Angle) ------------------
+    # Calculate global building centroid
+    cx = sum(a['rhino_x'] for a in anchors) / len(anchors)
+    cy = sum(a['rhino_y'] for a in anchors) / len(anchors)
     
-    columns = []
-    for a in floors[0]:
-        columns.append([a])
+    # Assign radial angles and sort floors
+    for f in floors:
+        for a in f:
+            a['angle'] = math.atan2(a['rhino_y'] - cy, a['rhino_x'] - cx)
+        f.sort(key=lambda a: a['angle'])
         
-    for f in range(1, len(floors)):
-        floor_anchors = floors[f]
-        # Create KDTree of this floor's X,Y (horizontal in Rhino)
-        pts_f = np.array([[a['rhino_x'], a['rhino_y']] for a in floor_anchors])
-        tree_f = KDTree(pts_f)
+    for f_idx in range(len(floors)):
+        curr_floor = floors[f_idx]
         
-        used_indices = set()
-        
-        for col in columns:
-            prev_a = col[-1]
+        if f_idx < len(floors) - 1:
+            next_floor = floors[f_idx + 1]
+            pts_next = np.array([[math.cos(a['angle']), math.sin(a['angle'])] for a in next_floor])
+            tree_next = KDTree(pts_next)
+        else:
+            next_floor = None
+            tree_next = None
             
-            # Find the closest available anchor
-            k = 1
-            while True:
-                if k > len(floor_anchors):
-                    break
+        for a in curr_floor:
+            if not tree_next:
+                a['pitch'] = 0.0
+                continue
                 
-                dists, indices = tree_f.query([prev_a['rhino_x'], prev_a['rhino_y']], k=k)
+            target_pt = [math.cos(a['angle']), math.sin(a['angle'])]
+            dist_val, idx = tree_next.query(target_pt)
+            
+            if dist_val < 0.26: # ~15 degrees max allowed shift
+                next_a = next_floor[idx]
+                vx = next_a['rhino_x'] - a['rhino_x']
+                vy = next_a['rhino_y'] - a['rhino_y']
+                vz = next_a['rhino_z'] - a['rhino_z']
                 
-                # tree_f.query returns a scalar if k=1, but an array if k>1
-                if k == 1:
-                    idx = indices
+                length_outward = math.hypot(a.get('m01', 0), a.get('m11', 0))
+                if length_outward > 0:
+                    outward_x = a['m01'] / length_outward
+                    outward_y = a['m11'] / length_outward
                 else:
-                    idx = indices[-1]
+                    outward_x, outward_y = 0, 1
                     
-                if idx not in used_indices:
-                    used_indices.add(idx)
-                    col.append(floor_anchors[idx])
-                    break
-                k += 1
-            
-    # ------------------ SEGMENTED PITCH CALCULATION ------------------
-    for col in columns:
-        for i in range(len(col)):
-            curr_a = col[i]
-            
-            if len(col) == 1:
-                prev_a = curr_a
-                next_a = curr_a
-            elif i == 0:
-                prev_a = col[i]
-                next_a = col[i+1]
-            elif i == len(col) - 1:
-                prev_a = col[i-1]
-                next_a = col[i]
-            else:
-                prev_a = col[i-1]
-                next_a = col[i+1]
+                v_outward = vx * outward_x + vy * outward_y
                 
-            # Vector from prev to next
-            vx = next_a['rhino_x'] - prev_a['rhino_x']
-            vy = next_a['rhino_y'] - prev_a['rhino_y']
-            vz = next_a['rhino_z'] - prev_a['rhino_z']
-            
-            # Project horizontal vector (vx, vy) onto bracket's outward normal vector (m01, m11)
-            # The CAD block's Y-axis (m01, m11) points outwards from the wall
-            length_outward = math.hypot(curr_a.get('m01', 0), curr_a.get('m11', 0))
-            if length_outward > 0:
-                outward_x = curr_a['m01'] / length_outward
-                outward_y = curr_a['m11'] / length_outward
+                if vz != 0:
+                    a['pitch'] = math.atan2(-v_outward, vz)
+                else:
+                    a['pitch'] = 0.0
             else:
-                outward_x, outward_y = 0, 1
+                a['pitch'] = 0.0
                 
-            v_outward = vx * outward_x + vy * outward_y
-            
-            # Pitch = arctan(-V_outward / V_z)
-            if vz != 0:
-                pitch = math.atan2(-v_outward, vz)
-            else:
-                pitch = 0.0
-                
-            curr_a['pitch'] = pitch
-            
     # ------------------ EXPORT ------------------
     export_anchors = []
     for f_idx in range(len(floors)):
-        floor_group = [col[f_idx] for col in columns if f_idx < len(col)]
+        radial_group = floors[f_idx]
         
-        # Calculate centroid to sort radially
-        cx = sum(a['rhino_x'] for a in floor_group) / len(floor_group)
-        cy = sum(a['rhino_y'] for a in floor_group) / len(floor_group)
-        
-        radial_group = sorted(floor_group, key=lambda a: math.atan2(a['rhino_y'] - cy, a['rhino_x'] - cx))
-        
-        for i, a in enumerate(floor_group):
+        for i, a in enumerate(radial_group):
             three_x = a['rhino_x'] / 1000.0
             three_y = a['rhino_z'] / 1000.0
             three_z = -a['rhino_y'] / 1000.0
