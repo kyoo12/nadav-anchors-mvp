@@ -375,27 +375,51 @@ def main():
             is_roof = (f_idx == len(floors) - 1)
             floor_prefix = "Roof" if is_roof else f"F{f_idx}"
             
-            mapping = {
-                4: ('P0', 'P1'),
-                13: ('P1', 'P2'),
-                22: ('P2', 'P3'),
-                31: ('P3', 'P4'),
-                40: ('P4', 'P5'),
-                58: ('P5', 'P6'),
-                73: ('P6', 'P7'),
-                70: ('P7', 'W1'),
-                61: ('W2', 'P8'),
-                49: ('P8', 'P9')
-            }
+            # Dynamic Middle Anchor Logic
+            panels = [('P0', 'P1'), ('P1', 'P2'), ('P2', 'P3'), ('P3', 'P4'), ('P4', 'P5'), ('P5', 'P6'), ('P6', 'P7'), ('P7', 'W1'), ('W2', 'P8'), ('P8', 'P9')]
             
-            is_middle = (i in mapping)
+            is_middle = False
+            name_a, name_b = None, None
+            
+            # Find which panel this anchor belongs to (if it is the middle one)
+            for p_a, p_b in panels:
+                tree_a = pillars_data.get(p_a)
+                tree_b = pillars_data.get(p_b)
+                if not tree_a or not tree_b: continue
+                
+                # We need to find the closest anchors to P_a and P_b in the ENTIRE radial group
+                best_a_idx, dist_a = -1, float('inf')
+                best_b_idx, dist_b = -1, float('inf')
+                
+                for idx, temp_a in enumerate(radial_group):
+                    pt = [temp_a['rhino_x'], temp_a['rhino_y']]
+                    da, _ = tree_a['tree'].query(pt)
+                    if da < dist_a:
+                        dist_a = da
+                        best_a_idx = idx
+                        
+                    db, _ = tree_b['tree'].query(pt)
+                    if db < dist_b:
+                        dist_b = db
+                        best_b_idx = idx
+                
+                if best_a_idx > best_b_idx and abs(best_a_idx - best_b_idx) > len(radial_group)/2:
+                    mid_idx = (best_a_idx + best_b_idx + len(radial_group)) // 2
+                    mid_idx = mid_idx % len(radial_group)
+                else:
+                    mid_idx = (best_a_idx + best_b_idx) // 2
+                    
+                if i == mid_idx:
+                    is_middle = True
+                    name_a = p_a
+                    name_b = p_b
+                    break
             
             pillar_a_dist, pillar_b_dist = None, None
             pillar_a_path, pillar_b_path = None, None
             pillar_a_label, pillar_b_label = "Pillar A", "Pillar B"
             
             if is_middle:
-                name_a, name_b = mapping[i]
                 tree_a = pillars_data.get(name_a)
                 tree_b = pillars_data.get(name_b)
                 
