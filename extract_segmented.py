@@ -191,56 +191,33 @@ def main():
             for idx in idx_list:
                 c_pt = concrete_pts[idx]
                 
-                # Vector from AN block to this concrete point
-                dx_an = c_pt[0] - an_block['x']
-                dy_an = c_pt[1] - an_block['y']
+                # Vector from PL block to this concrete point
+                dx_pl = c_pt[0] - pl_block['x']
+                dy_pl = c_pt[1] - pl_block['y']
                 
-                # Project onto AN block's Y-axis (distance from AN insertion point)
-                proj_from_an = dx_an * vy_x + dy_an * vy_y
+                # Project onto Y-axis (distance from PL insertion point to wall)
+                proj_from_pl = dx_pl * vy_x + dy_pl * vy_y
                 
-                # Determine minimum valid distance to wall based on bracket type
-                an_name = an_block['name'].upper()
-                if '3' in an_name or '200' in an_name:
-                    min_dist = 190.0
-                elif '150' in an_name:
-                    min_dist = 140.0
-                elif '1_1' in an_name or '120' in an_name:
-                    min_dist = 110.0
-                else:
-                    min_dist = 60.0
+                # We want the concrete point that is physically closest to the PL block along the Y-axis
+                if abs(proj_from_pl) < abs(best_dist) if best_dist != 999999 else True:
+                    best_dist = proj_from_pl
                     
-                # Ignore points that belong to the exploded anchor mesh itself
-                if proj_from_an > min_dist:
-                    ideal_gap = min_dist
-
-                    # If it's valid, find the total distance from the PL block!
-                    dx_pl = c_pt[0] - pl_block['x']
-                    dy_pl = c_pt[1] - pl_block['y']
-                    proj_from_pl = dx_pl * vy_x + dy_pl * vy_y
-                    
-                    # We want the absolute value ONLY to find the closest concrete vertex, 
-                    # but we must preserve the sign (embedded vs gap).
-                    if abs(proj_from_pl) < abs(best_dist) if best_dist != 999999 else True:
-                        best_dist = proj_from_pl
-                        
             placement_error_amount = 0.0
             if best_dist < 999999:
-                # 1. Calculate True Placement Error
-                placement_error_amount = best_dist - ideal_gap
-                
-                # Report the TRUE distance, not the snapped distance!
+                # 1. Calculate True Placement Error (Ideal gap for PL block is 0.0)
+                placement_error_amount = best_dist
                 dist_to_concrete = best_dist
                 
                 # 2. Sanity Audit
-                # If it penetrates wall (best_dist < 20) or hovers too far
-                if best_dist < 20.0 or best_dist > ideal_gap + 300.0:
+                # If it penetrates wall severely (< -100) or hovers too far (> 150)
+                if best_dist < -100.0 or best_dist > 150.0:
                     placement_error = True
                 else:
-                    # 3. Surface Snapping Auto-Correction (for Visual 3D model ONLY)
-                    # We still shift the coordinates in the JSON so the 3D viewer looks perfect.
+                    # 3. Surface Snapping Auto-Correction
                     if abs(placement_error_amount) > 1.0:
                         pl_block['x'] += placement_error_amount * vy_x
                         pl_block['y'] += placement_error_amount * vy_y
+
                         # Notice we DO NOT overwrite dist_to_concrete. 
                         # We let the front-end display the TRUE dist_to_concrete and error!
         
