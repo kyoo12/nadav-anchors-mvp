@@ -155,7 +155,7 @@ def main():
         if i in visited:
             continue
         
-        neighbors = tree.query_ball_point(pts_blocks[i], 150)
+        neighbors = tree.query_ball_point(pts_blocks[i], 500)
         
         cluster_names = []
         pl_block = raw_blocks[i]
