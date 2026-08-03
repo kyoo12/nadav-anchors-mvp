@@ -306,58 +306,65 @@ def main():
             a['angle'] = math.atan2(a['rhino_y'] - cy, a['rhino_x'] - cx)
         f.sort(key=lambda a: a['angle'])
         
-    # Align floors to Floor 0 to prevent index wrapping caused by building twist
+    # Pre-calculate local centroids for every floor to neutralize the lean
+    floor_centroids = []
+    for f in floors:
+        floor_cx = sum(a['rhino_x'] for a in f) / len(f)
+        floor_cy = sum(a['rhino_y'] for a in f) / len(f)
+        floor_centroids.append((floor_cx, floor_cy))
+        
+    # Align floors using Lean-Neutralized Physical Distance matching
     for f_idx in range(len(floors) - 1):
         curr_floor = floors[f_idx]
         next_floor = floors[f_idx + 1]
         
-        a0 = curr_floor[0]
-        pts_next = np.array([[math.cos(a['angle']), math.sin(a['angle'])] for a in next_floor])
+        curr_cx, curr_cy = floor_centroids[f_idx]
+        next_cx, next_cy = floor_centroids[f_idx + 1]
+        
+        dx = next_cx - curr_cx
+        dy = next_cy - curr_cy
+        
+        # Shift next_floor backwards by the lean delta to neutralize it
+        pts_next = np.array([[a['rhino_x'] - dx, a['rhino_y'] - dy] for a in next_floor])
         tree_next = KDTree(pts_next)
         
-        target_pt = [math.cos(a0['angle']), math.sin(a0['angle'])]
+        # Find which anchor on next_floor is physically closest to curr_floor[0]
+        a0 = curr_floor[0]
+        target_pt = [a0['rhino_x'], a0['rhino_y']]
+        
         dist_val, idx = tree_next.query(target_pt)
         
+        # Roll the array so the continuous physical column stays at the exact same index
         floors[f_idx + 1] = next_floor[idx:] + next_floor[:idx]
         
+    # Calculate vertical pitch rotations now that arrays are perfectly contiguous
     for f_idx in range(len(floors)):
         curr_floor = floors[f_idx]
-        
-        if f_idx < len(floors) - 1:
-            next_floor = floors[f_idx + 1]
-            pts_next = np.array([[math.cos(a['angle']), math.sin(a['angle'])] for a in next_floor])
-            tree_next = KDTree(pts_next)
-        else:
-            next_floor = None
-            tree_next = None
+        next_floor = floors[f_idx + 1] if f_idx < len(floors) - 1 else None
             
-        for a in curr_floor:
-            if not tree_next:
+        for i, a in enumerate(curr_floor):
+            if not next_floor:
                 a['pitch'] = 0.0
                 continue
                 
-            target_pt = [math.cos(a['angle']), math.sin(a['angle'])]
-            dist_val, idx = tree_next.query(target_pt)
+            # The next anchor in the vertical column is literally the exact same index!
+            next_a = next_floor[i]
             
-            if dist_val < 0.26: # ~15 degrees max allowed shift
-                next_a = next_floor[idx]
-                vx = next_a['rhino_x'] - a['rhino_x']
-                vy = next_a['rhino_y'] - a['rhino_y']
-                vz = next_a['rhino_z'] - a['rhino_z']
+            vx = next_a['rhino_x'] - a['rhino_x']
+            vy = next_a['rhino_y'] - a['rhino_y']
+            vz = next_a['rhino_z'] - a['rhino_z']
+            
+            length_outward = math.hypot(a.get('m01', 0), a.get('m11', 0))
+            if length_outward > 0:
+                outward_x = a['m01'] / length_outward
+                outward_y = a['m11'] / length_outward
+            else:
+                outward_x, outward_y = 0, 1
                 
-                length_outward = math.hypot(a.get('m01', 0), a.get('m11', 0))
-                if length_outward > 0:
-                    outward_x = a['m01'] / length_outward
-                    outward_y = a['m11'] / length_outward
-                else:
-                    outward_x, outward_y = 0, 1
-                    
-                v_outward = vx * outward_x + vy * outward_y
-                
-                if vz != 0:
-                    a['pitch'] = math.atan2(-v_outward, vz)
-                else:
-                    a['pitch'] = 0.0
+            v_outward = vx * outward_x + vy * outward_y
+            
+            if vz != 0:
+                a['pitch'] = math.atan2(-v_outward, vz)
             else:
                 a['pitch'] = 0.0
                 
