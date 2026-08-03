@@ -132,27 +132,6 @@ function App() {
     });
   };
 
-  const exportCSV = () => {
-    const visibleAnchors = anchors.filter(a => {
-      const parts = (a.metadata || '').split('|');
-      const typeName = parts[0]?.trim() || '';
-      return visibleFloors.has(a.floor) && visibleBrackets.has(typeName);
-    });
-    const header = "PointID,X,Y,Z,Floor,Type,NearestGridX,OffsetX,NearestGridY,OffsetY,WallGap\\n";
-    const rows = visibleAnchors.map(a => 
-      `${a.id},${a.x.toFixed(3)},${a.y.toFixed(3)},${a.z.toFixed(3)},${a.floor},${a.metadata},${a.nearestGridX},${(a.offsetX || 0).toFixed(1)},${a.nearestGridY},${(a.offsetY || 0).toFixed(1)},${(a.distanceToConcrete || 0).toFixed(1)},${(a.shimThickness || 0).toFixed(1)}`
-    ).join("\\n");
-    
-    const blob = new Blob([header + rows], { type: 'text/csv' });
-    const url = window.URL.createObjectURL(blob);
-    const a = document.createElement('a');
-    a.setAttribute('hidden', '');
-    a.setAttribute('href', url);
-    a.setAttribute('download', 'nadav_anchors_export.csv');
-    document.body.appendChild(a);
-    a.click();
-    document.body.removeChild(a);
-  };
 
   const toggleAll = () => {
     if (visibleFloors.size === floors.length) {
@@ -237,29 +216,7 @@ function App() {
               Find
             </button>
           </form>
-
-          <button 
-            onClick={exportCSV}
-            style={{ 
-              padding: '0 16px', 
-              background: 'transparent', 
-              border: '2px solid var(--accent-cyan)',
-              color: 'var(--accent-cyan)',
-              borderRadius: '12px',
-              fontSize: '1rem',
-              fontWeight: 700,
-              cursor: 'pointer',
-              minHeight: '56px',
-              display: 'flex',
-              justifyContent: 'center',
-              alignItems: 'center',
-              gap: '8px'
-            }}
-          >
-            ?? Export Visible CSV
-          </button>
         </div>
-
         <div className="bento-scroll">
           {/* Module B: Floor Filters */}
           <div className="glass-panel">
