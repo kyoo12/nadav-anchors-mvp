@@ -18,6 +18,7 @@ import RightSidebar from './components/RightSidebar'
 import LoadingScreen from './components/LoadingScreen'
 import BuildingMesh from './components/BuildingMesh'
 import FloatingFloorMesh from './components/FloatingFloorMesh'
+import { Analytics } from "@vercel/analytics/react"
 import { Suspense } from 'react'
 import { useQuery } from '@tanstack/react-query'
 import * as THREE from 'three'
@@ -157,6 +158,7 @@ function App() {
 
   return (
     <>
+      <Analytics />
       <motion.div 
         className="sidebar-container"
         initial={{ x: -400, opacity: 0 }}
