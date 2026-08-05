@@ -21,6 +21,7 @@ import FloatingFloorMesh from './components/FloatingFloorMesh'
 import { Suspense } from 'react'
 import { useQuery } from '@tanstack/react-query'
 import * as THREE from 'three'
+import { Analytics } from '@vercel/analytics/react'
 
 // CameraController smoothly flies the camera and orbit controls to the selected anchor
 function CameraController({ selectedAnchor }: { selectedAnchor: Anchor | null }) {
@@ -334,6 +335,7 @@ function App() {
           target={[0, 15, 0]} 
         />
       </Canvas>
+      <Analytics />
     </>
   )
 }
